@@ -1,0 +1,631 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Register — TECH VISTARA 3.0</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Space+Mono:wght@400;700&family=Outfit:wght@300;400;600;800;900&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+<style>
+:root{
+  --bg:#050810;--surface:#0d1220;--card:#111827;
+  --accent:#00f5c4;--accent2:#ff6b35;--accent3:#7c3aed;
+  --red:#ff3b3b;--orange:#ff8c00;
+  --text:#e8eaf0;--muted:#6b7280;--border:rgba(0,245,196,0.15);
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{background:var(--bg);color:var(--text);font-family:'Outfit',sans-serif;overflow-x:hidden;min-height:100vh;}
+body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(rgba(0,245,196,0.03) 1px,transparent 1px),linear-gradient(90deg,rgba(0,245,196,0.03) 1px,transparent 1px);background-size:60px 60px;pointer-events:none;z-index:0;}
+.orb{position:fixed;border-radius:50%;filter:blur(120px);pointer-events:none;z-index:0;}
+.orb1{width:500px;height:500px;background:rgba(0,245,196,0.06);top:-100px;right:-100px;}
+.orb2{width:400px;height:400px;background:rgba(255,107,53,0.06);bottom:100px;left:-100px;}
+.orb3{width:300px;height:300px;background:rgba(124,58,237,0.08);top:50%;left:40%;}
+@keyframes fadeUp{from{opacity:0;transform:translateY(28px);}to{opacity:1;transform:translateY(0);}}
+@keyframes modalPop{from{transform:scale(0.7);opacity:0;}to{transform:scale(1);opacity:1;}}
+@keyframes float{0%,100%{transform:translateY(0);}50%{transform:translateY(-8px);}}
+@keyframes shimmer{0%{background-position:0% center;}100%{background-position:200% center;}}
+@keyframes spin{to{transform:rotate(360deg);}}
+.anim-1{animation:fadeUp 0.6s ease both;}
+.anim-2{animation:fadeUp 0.6s ease 0.1s both;}
+.anim-3{animation:fadeUp 0.6s ease 0.2s both;}
+.anim-4{animation:fadeUp 0.6s ease 0.3s both;}
+.anim-5{animation:fadeUp 0.6s ease 0.4s both;}
+.anim-6{animation:fadeUp 0.6s ease 0.5s both;}
+.back-btn{position:fixed;top:20px;left:20px;z-index:50;display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.08);border-radius:100px;padding:8px 16px;font-family:'Space Mono',monospace;font-size:10px;letter-spacing:2px;color:var(--muted);text-decoration:none;transition:all 0.25s;cursor:pointer;}
+.back-btn:hover{color:var(--text);border-color:rgba(255,255,255,0.2);background:rgba(255,255,255,0.08);}
+.hero{text-align:center;padding:72px 24px 40px;position:relative;z-index:1;}
+.badge{display:inline-block;font-family:'Space Mono',monospace;font-size:11px;letter-spacing:3px;color:var(--accent);border:1px solid var(--border);background:rgba(0,245,196,0.05);padding:8px 20px;border-radius:100px;margin-bottom:24px;}
+.hero-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(54px,10vw,110px);line-height:0.9;letter-spacing:2px;}
+.hero-title .line1{color:var(--text);display:block;}
+.hero-title .line2{display:block;background:linear-gradient(90deg,var(--accent),var(--accent3),var(--accent2));background-size:200% auto;-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;animation:shimmer 4s linear infinite;}
+.hero-sub{font-size:15px;color:var(--muted);margin-top:16px;font-weight:300;}
+.hero-sub span{color:var(--accent2);font-weight:600;}
+.info-pills{display:flex;justify-content:center;gap:12px;flex-wrap:wrap;margin-top:24px;}
+.info-pill{display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:100px;padding:8px 16px;font-size:13px;color:var(--muted);}
+.info-pill strong{color:var(--text);}
+.info-pill.accent{border-color:var(--border);background:rgba(0,245,196,0.06);}
+.info-pill.accent strong{color:var(--accent);}
+.rounds-section{padding:48px 0 20px;position:relative;z-index:1;}
+.section-label{font-family:'Space Mono',monospace;font-size:11px;letter-spacing:3px;color:var(--accent);text-align:center;margin-bottom:10px;}
+.section-sublabel{text-align:center;font-size:13px;color:var(--muted);margin-bottom:32px;}
+.rounds-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;max-width:980px;margin:0 auto;padding:0 24px;}
+.round-card{background:var(--card);border:1px solid rgba(255,255,255,0.06);border-radius:18px;padding:24px 18px;position:relative;overflow:hidden;transition:transform 0.3s,box-shadow 0.3s,border-color 0.3s;cursor:pointer;}
+.round-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;}
+.round-card:nth-child(1)::before{background:linear-gradient(90deg,var(--accent),transparent);}
+.round-card:nth-child(2)::before{background:linear-gradient(90deg,var(--red),transparent);}
+.round-card:nth-child(3)::before{background:linear-gradient(90deg,var(--accent3),transparent);}
+.round-card:nth-child(4)::before{background:linear-gradient(90deg,var(--orange),transparent);}
+.round-card:hover{transform:translateY(-5px);box-shadow:0 16px 48px rgba(0,0,0,0.5);}
+.round-card:nth-child(1):hover{border-color:rgba(0,245,196,0.2);}
+.round-card:nth-child(2):hover{border-color:rgba(255,59,59,0.2);}
+.round-card:nth-child(3):hover{border-color:rgba(124,58,237,0.2);}
+.round-card:nth-child(4):hover{border-color:rgba(255,140,0,0.2);}
+.round-num{font-family:'Bebas Neue',sans-serif;font-size:44px;color:rgba(255,255,255,0.04);line-height:1;position:absolute;top:10px;right:14px;}
+.round-icon{font-size:26px;margin-bottom:10px;}
+.round-name{font-size:15px;font-weight:800;color:var(--text);}
+.round-subtitle{font-size:10px;font-family:'Space Mono',monospace;margin-top:4px;}
+.round-card:nth-child(1) .round-subtitle{color:var(--accent);}
+.round-card:nth-child(2) .round-subtitle{color:var(--red);}
+.round-card:nth-child(3) .round-subtitle{color:var(--accent3);}
+.round-card:nth-child(4) .round-subtitle{color:var(--orange);}
+.round-desc{font-size:11px;color:var(--muted);margin-top:8px;line-height:1.5;}
+.click-hint{display:inline-flex;align-items:center;gap:5px;margin-top:12px;font-size:9px;font-family:'Space Mono',monospace;color:var(--muted);background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.07);padding:4px 10px;border-radius:100px;}
+.rmodal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.85);z-index:100;align-items:flex-start;justify-content:center;padding:20px;overflow-y:auto;backdrop-filter:blur(8px);}
+.rmodal-overlay.show{display:flex;}
+.rmodal{background:var(--card);border:1px solid rgba(255,255,255,0.08);border-radius:24px;max-width:660px;width:100%;margin:auto;position:relative;overflow:hidden;animation:modalPop 0.4s cubic-bezier(.175,.885,.32,1.275) both;}
+.rmodal-top{height:4px;}
+.rmodal-top.c1{background:linear-gradient(90deg,var(--accent),var(--accent3));}
+.rmodal-top.c2{background:linear-gradient(90deg,var(--red),#ff6b6b);}
+.rmodal-top.c3{background:linear-gradient(90deg,var(--accent3),#a78bfa);}
+.rmodal-top.c4{background:linear-gradient(90deg,var(--orange),#ffd60a);}
+.rmodal-header{padding:24px 28px 18px;border-bottom:1px solid rgba(255,255,255,0.06);}
+.rmodal-round-tag{font-family:'Space Mono',monospace;font-size:10px;letter-spacing:3px;margin-bottom:6px;}
+.rmodal-title{font-family:'Bebas Neue',sans-serif;font-size:34px;letter-spacing:1px;line-height:1;}
+.rmodal-body{padding:20px 28px 28px;max-height:65vh;overflow-y:auto;}
+.rmodal-body::-webkit-scrollbar{width:4px;}
+.rmodal-body::-webkit-scrollbar-thumb{background:rgba(255,255,255,0.1);border-radius:2px;}
+.rmodal-close{position:absolute;top:14px;right:14px;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.08);color:var(--text);width:32px;height:32px;border-radius:50%;cursor:pointer;font-size:15px;display:flex;align-items:center;justify-content:center;transition:background 0.2s;}
+.rmodal-close:hover{background:rgba(255,255,255,0.14);}
+.sub-round{background:var(--surface);border:1px solid rgba(255,255,255,0.06);border-radius:14px;padding:16px 18px;margin-bottom:12px;}
+.sub-round-title{font-weight:800;font-size:14px;margin-bottom:8px;display:flex;align-items:center;gap:10px;flex-wrap:wrap;}
+.sub-round-title .tag{font-family:'Space Mono',monospace;font-size:9px;letter-spacing:1px;padding:3px 10px;border-radius:100px;}
+.rule-list{list-style:none;display:flex;flex-direction:column;gap:7px;margin-top:8px;}
+.rule-list li{font-size:13px;color:var(--muted);padding-left:18px;position:relative;line-height:1.6;}
+.rule-list li::before{content:'--';position:absolute;left:0;color:var(--accent);font-family:'Space Mono',monospace;}
+.info-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:10px;}
+.info-chip{background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.06);border-radius:10px;padding:10px 14px;}
+.ichip-label{font-family:'Space Mono',monospace;font-size:9px;letter-spacing:2px;color:var(--muted);margin-bottom:4px;}
+.ichip-val{font-size:14px;font-weight:700;color:var(--text);}
+.modal-desc{font-size:14px;color:var(--muted);line-height:1.8;margin-bottom:16px;}
+.modal-important{background:rgba(255,107,53,0.08);border:1px solid rgba(255,107,53,0.2);border-radius:12px;padding:14px 18px;margin-top:16px;}
+.imp-title{font-family:'Space Mono',monospace;font-size:10px;letter-spacing:2px;color:var(--accent2);margin-bottom:8px;}
+.modal-important p{font-size:13px;color:var(--muted);line-height:1.6;}
+.glitch-box{background:rgba(255,59,59,0.06);border:1px solid rgba(255,59,59,0.15);border-radius:14px;padding:20px;margin-bottom:12px;font-family:'Space Mono',monospace;font-size:13px;color:#ff6b6b;line-height:2;}
+.gl-title{font-size:15px;color:var(--red);font-weight:700;margin-bottom:8px;}
+.form-section{padding:40px 0 60px;position:relative;z-index:1;}
+.form-wrap{max-width:860px;margin:0 auto;padding:0 24px;}
+.form-card{background:var(--card);border:1px solid rgba(255,255,255,0.06);border-radius:28px;overflow:hidden;}
+.form-card-top{height:3px;background:linear-gradient(90deg,var(--accent),var(--accent3),var(--accent2));}
+.form-header{padding:28px 36px 22px;border-bottom:1px solid rgba(255,255,255,0.06);}
+.form-header h2{font-family:'Bebas Neue',sans-serif;font-size:36px;letter-spacing:1px;line-height:1;}
+.form-header p{color:var(--muted);font-size:14px;margin-top:6px;}
+.form-body{padding:28px 36px;}
+label{display:block;font-family:'Space Mono',monospace;font-size:10px;letter-spacing:2px;color:var(--accent);margin-bottom:8px;}
+input,select{width:100%;background:var(--surface);border:1px solid rgba(255,255,255,0.08);border-radius:12px;color:var(--text);font-family:'Outfit',sans-serif;font-size:15px;padding:13px 16px;outline:none;transition:border-color 0.25s,box-shadow 0.25s,transform 0.2s;-webkit-appearance:none;appearance:none;}
+input::placeholder{color:var(--muted);}
+input:focus,select:focus{border-color:var(--accent);box-shadow:0 0 0 3px rgba(0,245,196,0.1);transform:translateY(-1px);}
+select option{background:var(--surface);}
+.field{margin-bottom:0;}
+.field.err input,.field.err select{border-color:var(--red)!important;box-shadow:0 0 0 3px rgba(255,59,59,0.1)!important;}
+.err-msg{font-size:11px;color:var(--red);font-family:'Space Mono',monospace;margin-top:5px;display:none;}
+.field.err .err-msg{display:block;}
+.field-row{display:grid;gap:16px;margin-bottom:16px;}
+.c2{grid-template-columns:1fr 1fr;}
+.sec-div{display:flex;align-items:center;gap:14px;margin:24px 0 18px;}
+.sec-lbl{font-family:'Space Mono',monospace;font-size:10px;letter-spacing:3px;white-space:nowrap;flex-shrink:0;}
+.sec-lbl.orange{color:var(--accent2);}
+.sec-lbl.purple{color:#a78bfa;}
+.sec-line{flex:1;height:1px;background:rgba(255,255,255,0.06);}
+.member-card{background:var(--surface);border:1px solid rgba(255,255,255,0.06);border-radius:16px;padding:18px;margin-bottom:10px;transition:border-color 0.25s;}
+.member-card:focus-within{border-color:rgba(0,245,196,0.2);}
+.mtag{display:inline-block;font-family:'Space Mono',monospace;font-size:9px;letter-spacing:2px;padding:4px 12px;border-radius:100px;margin-bottom:12px;font-weight:700;}
+.mtag.leader{background:rgba(0,245,196,0.12);color:var(--accent);border:1px solid rgba(0,245,196,0.2);}
+.mtag.member{background:rgba(255,255,255,0.05);color:var(--muted);border:1px solid rgba(255,255,255,0.08);}
+.mf-name{margin-bottom:10px;}
+.mf-row{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+input[type=radio]{display:none;}
+.pay-toggle{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:4px;}
+.pay-opt{background:var(--surface);border:2px solid rgba(255,255,255,0.07);border-radius:16px;padding:18px;text-align:center;cursor:pointer;transition:all 0.25s;position:relative;display:block;}
+.pay-opt:hover{border-color:rgba(0,245,196,0.25);transform:translateY(-2px);}
+#radio-online:checked ~ .pay-toggle label[for="radio-online"],
+#radio-offline:checked ~ .pay-toggle label[for="radio-offline"]{border-color:var(--accent);background:rgba(0,245,196,0.07);box-shadow:0 0 24px rgba(0,245,196,0.1);}
+#radio-online:checked ~ .pay-toggle label[for="radio-online"]::after,
+#radio-offline:checked ~ .pay-toggle label[for="radio-offline"]::after{content:"\2713";position:absolute;top:10px;right:14px;font-size:13px;color:var(--accent);font-weight:700;}
+.pay-opt-icon{font-size:24px;margin-bottom:8px;}
+.pay-opt-title{font-weight:700;font-size:14px;color:var(--text);}
+.pay-opt-sub{font-size:10px;color:var(--muted);margin-top:2px;font-family:'Space Mono',monospace;}
+#panel-online{display:block;}
+#panel-offline{display:none;}
+#radio-offline:checked ~ #panel-online{display:none;}
+#radio-offline:checked ~ #panel-offline{display:block;}
+#radio-online:checked ~ #panel-online{display:block;}
+#radio-online:checked ~ #panel-offline{display:none;}
+.pay-grid{display:grid;grid-template-columns:170px 1fr;gap:24px;align-items:start;margin-top:16px;}
+.qr-card{background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:14px;text-align:center;}
+.qr-area{width:100%;aspect-ratio:1;background:rgba(0,245,196,0.04);border:2px dashed rgba(0,245,196,0.25);border-radius:12px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;font-size:10px;color:var(--muted);font-family:'Space Mono',monospace;margin-bottom:10px;padding:10px;line-height:1.6;}
+.qr-fee{font-family:'Bebas Neue',sans-serif;font-size:24px;color:var(--accent);line-height:1;}
+.qr-sub{font-size:10px;color:var(--muted);font-family:'Space Mono',monospace;letter-spacing:1px;}
+.upload-box{border:2px dashed rgba(124,58,237,0.3);border-radius:14px;padding:20px;text-align:center;cursor:pointer;position:relative;transition:border-color 0.2s,background 0.2s;margin-top:12px;}
+.upload-box:hover,.upload-box:focus-within{border-color:var(--accent3);background:rgba(124,58,237,0.05);}
+.upload-box.done{border-color:var(--accent);background:rgba(0,245,196,0.04);}
+.upload-box input[type=file]{position:absolute;inset:0;opacity:0;cursor:pointer;width:100%;height:100%;border:none!important;padding:0!important;background:none!important;box-shadow:none!important;transform:none!important;}
+.upload-fname{font-family:'Space Mono',monospace;font-size:11px;color:var(--accent);margin-top:8px;display:none;}
+.offline-box{background:rgba(255,107,53,0.05);border:1px solid rgba(255,107,53,0.2);border-radius:16px;padding:24px;margin-top:16px;text-align:center;}
+.offline-icon{font-size:40px;margin-bottom:10px;}
+.offline-title{font-family:'Bebas Neue',sans-serif;font-size:24px;letter-spacing:1px;color:var(--accent2);margin-bottom:10px;}
+.offline-desc{font-size:14px;color:var(--muted);line-height:1.8;margin-bottom:14px;}
+.offline-note{display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:100px;padding:8px 16px;font-size:11px;color:var(--muted);font-family:'Space Mono',monospace;}
+.submit-btn{width:100%;background:linear-gradient(135deg,var(--accent),#00c9a7);color:#000;border:none;border-radius:16px;padding:18px;font-family:'Bebas Neue',sans-serif;font-size:22px;letter-spacing:2px;cursor:pointer;transition:transform 0.25s,box-shadow 0.25s;margin-top:24px;display:flex;align-items:center;justify-content:center;gap:10px;}
+.submit-btn:hover{transform:translateY(-3px);box-shadow:0 10px 40px rgba(0,245,196,0.35);}
+.submit-btn:active{transform:translateY(-1px);}
+.submit-btn:disabled{opacity:0.5;cursor:not-allowed;transform:none!important;box-shadow:none!important;}
+.submit-note{text-align:center;font-size:12px;color:var(--muted);margin-top:10px;font-family:'Space Mono',monospace;}
+.spinner{width:18px;height:18px;border:2px solid rgba(0,0,0,0.3);border-top-color:#000;border-radius:50%;animation:spin 0.7s linear infinite;display:none;}
+.coord-section{position:relative;z-index:1;padding:10px 0 60px;}
+.coord-wrap{max-width:860px;margin:0 auto;padding:0 24px;}
+.coord-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;}
+.coord-group{background:var(--card);border:1px solid rgba(255,255,255,0.06);border-radius:20px;padding:22px;overflow:hidden;position:relative;}
+.coord-group::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;}
+.coord-group.male::before{background:linear-gradient(90deg,var(--accent),transparent);}
+.coord-group.female::before{background:linear-gradient(90deg,#f472b6,transparent);}
+.coord-group-title{font-family:'Space Mono',monospace;font-size:10px;letter-spacing:3px;margin-bottom:14px;}
+.coord-group.male .coord-group-title{color:var(--accent);}
+.coord-group.female .coord-group-title{color:#f472b6;}
+.coord-person{display:flex;align-items:center;gap:12px;padding:10px 0;border-bottom:1px solid rgba(255,255,255,0.05);}
+.coord-person:last-child{border-bottom:none;padding-bottom:0;}
+.coord-avatar{width:34px;height:34px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:15px;flex-shrink:0;}
+.coord-group.male .coord-avatar{background:rgba(0,245,196,0.1);}
+.coord-group.female .coord-avatar{background:rgba(244,114,182,0.1);}
+.coord-name{font-weight:700;font-size:14px;color:var(--text);}
+.coord-phone a{font-family:'Space Mono',monospace;font-size:11px;color:var(--accent);text-decoration:none;margin-top:2px;display:block;}
+.coord-group.female .coord-phone a{color:#f472b6;}
+.modal{display:none;position:fixed;inset:0;background:rgba(5,8,16,0.97);z-index:300;align-items:center;justify-content:center;padding:24px;text-align:center;}
+.modal.show{display:flex;}
+.modal-inner{animation:modalPop 0.5s cubic-bezier(.175,.885,.32,1.275) both;max-width:480px;width:100%;}
+.modal-emoji{font-size:72px;margin-bottom:16px;display:block;animation:float 3s ease-in-out infinite;}
+.modal-title{font-family:'Bebas Neue',sans-serif;font-size:56px;line-height:1;color:var(--accent);margin-bottom:14px;}
+.modal-sub{font-size:15px;color:var(--muted);line-height:1.8;margin-bottom:20px;}
+.modal-id{font-family:'Space Mono',monospace;font-size:12px;color:var(--accent);background:rgba(0,245,196,0.08);border:1px solid var(--border);padding:12px 24px;border-radius:10px;display:inline-block;margin-bottom:16px;}
+.modal-email-note{font-family:'Space Mono',monospace;font-size:11px;color:var(--muted);background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);padding:10px 18px;border-radius:10px;display:inline-block;}
+footer{text-align:center;padding:28px 24px 36px;color:var(--muted);font-size:12px;font-family:'Space Mono',monospace;position:relative;z-index:1;line-height:2.2;border-top:1px solid rgba(255,255,255,0.05);margin-top:20px;}
+@media(max-width:768px){
+  .rounds-grid{grid-template-columns:1fr 1fr;gap:10px;padding:0 16px;}
+  [style*="grid-template-columns:1fr 1fr 1fr"]{grid-template-columns:1fr!important;}
+  [style*="grid-template-columns:1fr 1fr"]:not(.pay-toggle):not(.mf-row):not(.c2):not(.coord-grid){grid-template-columns:1fr!important;}
+  .coord-grid{grid-template-columns:1fr;}
+  .pay-grid{grid-template-columns:1fr;}
+  .form-header{padding:22px 20px 18px;}
+  .form-body{padding:20px;}
+  .form-wrap{padding:0 16px;}
+}
+@media(max-width:500px){
+  .hero{padding:56px 16px 28px;}
+  .hero-title{font-size:clamp(48px,15vw,72px);}
+  .badge{font-size:9px;}
+  .info-pills{gap:8px;}
+  .info-pill{font-size:12px;padding:7px 12px;}
+  .rounds-grid{grid-template-columns:1fr 1fr;gap:8px;padding:0 12px;}
+  .round-card{padding:14px 12px;border-radius:14px;}
+  .round-name{font-size:12px;}
+  .c2{grid-template-columns:1fr;}
+  .mf-row{grid-template-columns:1fr;}
+  .pay-toggle{gap:8px;}
+  .pay-opt{padding:14px 10px;}
+  .submit-btn{font-size:18px;padding:16px;}
+  .modal-title{font-size:44px;}
+  label{font-size:9px;}
+  input,select{font-size:14px;padding:12px 14px;}
+  .form-card{border-radius:16px;}
+  .rmodal-header{padding:18px 16px 14px;}
+  .rmodal-title{font-size:26px;}
+  .rmodal-body{padding:14px 16px 20px;}
+}
+@media(max-width:360px){
+  .rounds-grid{grid-template-columns:1fr;}
+}
+</style>
+</head>
+<body>
+<div class="orb orb1"></div>
+<div class="orb orb2"></div>
+<div class="orb orb3"></div>
+
+<a class="back-btn" href="index.html">&#8592; BACK</a>
+
+<section class="hero">
+  <div class="badge anim-1">BCA DEPARTMENT &nbsp;&middot;&nbsp; SMD COLLEGE</div>
+  <h1 class="hero-title anim-2">
+    <span class="line1">TECH</span>
+    <span class="line2">VISTARA 3.0</span>
+  </h1>
+  <p class="hero-sub anim-3">28 March 2026 &nbsp;&middot;&nbsp; Seminar Hall &nbsp;&middot;&nbsp; <span>Register Your Team</span></p>
+  <div class="info-pills anim-4">
+    <div class="info-pill accent"><span>&#x1F4B0;</span><span>Fee <strong>&#8377;200</strong></span></div>
+    <div class="info-pill"><span>&#x1F465;</span><span><strong>4 Members</strong> / team</span></div>
+    <div class="info-pill"><span>&#x26A1;</span><span><strong>4 Rounds</strong></span></div>
+  </div>
+</section>
+
+<section class="rounds-section">
+  <div class="section-label anim-5">&#8212; THE 4 ROUNDS &#8212;</div>
+  <p class="section-sublabel anim-5">Tap any round to see full rules</p>
+  <div class="rounds-grid anim-6">
+    <div class="round-card" onclick="openRound(1)">
+      <div class="round-num">01</div><div class="round-icon">&#x1F9E0;</div>
+      <div class="round-name">Technical Quiz</div><div class="round-subtitle">3 PHASES</div>
+      <div class="round-desc">80 questions. Faster = more points.</div>
+      <div class="click-hint">&#x1F4CB; Rules</div>
+    </div>
+    <div class="round-card" onclick="openRound(2)">
+      <div class="round-num">02</div><div class="round-icon">&#x26A0;&#xFE0F;</div>
+      <div class="round-name">404 - Not Found</div><div class="round-subtitle">CLASSIFIED</div>
+      <div class="round-desc">3 unexpected sub-rounds await.</div>
+      <div class="click-hint">&#x1F512; Try</div>
+    </div>
+    <div class="round-card" onclick="openRound(3)">
+      <div class="round-num">03</div><div class="round-icon">&#x1F4BB;</div>
+      <div class="round-name">Coding Challenge</div><div class="round-subtitle">3 ACTIVITIES</div>
+      <div class="round-desc">Reverse, debug &amp; blind coding.</div>
+      <div class="click-hint">&#x1F4CB; Rules</div>
+    </div>
+    <div class="round-card" onclick="openRound(4)">
+      <div class="round-num">04</div><div class="round-icon">&#x1F5FA;&#xFE0F;</div>
+      <div class="round-name">Hunting Challenge</div><div class="round-subtitle">SCAVENGER + TREASURE</div>
+      <div class="round-desc">Clues, puzzles, teamwork.</div>
+      <div class="click-hint">&#x1F4CB; Rules</div>
+    </div>
+  </div>
+</section>
+
+<!-- ROUND MODALS -->
+<div class="rmodal-overlay" id="rmodal1" onclick="closeRound(event,1)">
+  <div class="rmodal"><div class="rmodal-top c1"></div><button class="rmodal-close" onclick="closeRoundBtn(1)">&#x2715;</button>
+    <div class="rmodal-header"><div class="rmodal-round-tag" style="color:var(--accent)">ROUND 01</div><div class="rmodal-title">Technical Quiz</div></div>
+    <div class="rmodal-body">
+      <p class="modal-desc">Two phases with increasing difficulty. Faster responses earn higher points. Questions cover trending tech topics and academic syllabus.</p>
+      <div class="sub-round"><div class="sub-round-title"><span>Easy Level</span><span class="tag" style="background:rgba(0,245,196,0.1);color:var(--accent);border:1px solid rgba(0,245,196,0.2);">PHASE 1</span></div><div class="info-grid"><div class="info-chip"><div class="ichip-label">QUESTIONS</div><div class="ichip-val">30</div></div><div class="info-chip"><div class="ichip-label">TIME/Q</div><div class="ichip-val">15 sec</div></div></div></div>
+      <div class="sub-round"><div class="sub-round-title"><span>Medium Level</span><span class="tag" style="background:rgba(255,140,0,0.1);color:var(--orange);border:1px solid rgba(255,140,0,0.2);">PHASE 2</span></div><div class="info-grid"><div class="info-chip"><div class="ichip-label">QUESTIONS</div><div class="ichip-val">30</div></div><div class="info-chip"><div class="ichip-label">TIME/Q</div><div class="ichip-val">25 sec</div></div></div></div>
+      <div class="sub-round"><div class="sub-round-title"><span>Hard Level</span><span class="tag" style="background:rgba(255,59,59,0.1);color:var(--red);border:1px solid rgba(255,59,59,0.2);">PHASE 3</span></div><div class="info-grid"><div class="info-chip"><div class="ichip-label">QUESTIONS</div><div class="ichip-val">20</div></div><div class="info-chip"><div class="ichip-label">TIME/Q</div><div class="ichip-val">40 sec</div></div></div></div>
+      <div class="modal-important"><div class="imp-title">RULES</div><ul class="rule-list"><li>Faster responses earn higher points.</li><li>Questions cover trending technology topics and academic syllabus.</li><li>One-third of teams eliminated after each sub-round based on scores.</li></ul></div>
+    </div>
+  </div>
+</div>
+
+<div class="rmodal-overlay" id="rmodal2" onclick="closeRound(event,2)">
+  <div class="rmodal"><div class="rmodal-top c2"></div><button class="rmodal-close" onclick="closeRoundBtn(2)">&#x2715;</button>
+    <div class="rmodal-header"><div class="rmodal-round-tag" style="color:var(--red)">ROUND 02</div><div class="rmodal-title">404 - Round Not Found</div></div>
+    <div class="rmodal-body">
+      <div class="glitch-box"><div class="gl-title">ERROR DETECTED.</div>Round details missing. Attempting recovery...<br><br>This round contains three unexpected sub-rounds.<br><br>But the rules might not always be obvious.<br><br>You may need to decode clues, solve riddles, think differently.<br><br><strong style="color:var(--red)">404 - Information Not Found.</strong><br><br>Good luck. You might need it.</div>
+      <div class="modal-important"><div class="imp-title">NOTE</div><p>Sub-round details are classified. Show up and find out. &#x1F608;</p></div>
+    </div>
+  </div>
+</div>
+
+<div class="rmodal-overlay" id="rmodal3" onclick="closeRound(event,3)">
+  <div class="rmodal"><div class="rmodal-top c3"></div><button class="rmodal-close" onclick="closeRoundBtn(3)">&#x2715;</button>
+    <div class="rmodal-header"><div class="rmodal-round-tag" style="color:var(--accent3)">ROUND 03</div><div class="rmodal-title">Coding Challenge</div></div>
+    <div class="rmodal-body">
+      <p class="modal-desc">No elimination round. Evaluates coding skills, logical thinking and debugging ability. Each member does exactly one activity.</p>
+      <div class="sub-round"><div class="sub-round-title" style="color:#a78bfa;">i. Reverse Coding <span class="tag" style="background:rgba(124,58,237,0.1);color:#a78bfa;border:1px solid rgba(124,58,237,0.2);">2 MEMBERS</span></div><p style="font-size:13px;color:var(--muted);margin-bottom:8px;line-height:1.6;">Participants will be given the expected program output on paper. Write the code that produces the given output and execute it.</p><div class="info-grid"><div class="info-chip"><div class="ichip-label">TIME</div><div class="ichip-val">15-20 mins</div></div><div class="info-chip"><div class="ichip-label">MEMBERS</div><div class="ichip-val">2</div></div></div></div>
+      <div class="sub-round"><div class="sub-round-title" style="color:#a78bfa;">ii. Debugging <span class="tag" style="background:rgba(124,58,237,0.1);color:#a78bfa;border:1px solid rgba(124,58,237,0.2);">1 MEMBER</span></div><p style="font-size:13px;color:var(--muted);margin-bottom:8px;line-height:1.6;">A block of code with errors (syntax, logical, or runtime) will be given. Identify the errors, correct them, and execute the program.</p><div class="info-grid"><div class="info-chip"><div class="ichip-label">TIME</div><div class="ichip-val">10 mins</div></div><div class="info-chip"><div class="ichip-label">MEMBERS</div><div class="ichip-val">1</div></div></div></div>
+      <div class="sub-round"><div class="sub-round-title" style="color:#a78bfa;">iii. Blind Coding <span class="tag" style="background:rgba(124,58,237,0.1);color:#a78bfa;border:1px solid rgba(124,58,237,0.2);">1 MEMBER</span></div><p style="font-size:13px;color:var(--muted);margin-bottom:8px;line-height:1.6;">A piece of code will be briefly displayed on screen. Participants must retype the code accurately after the display is turned off.</p><div class="info-grid"><div class="info-chip"><div class="ichip-label">TIME</div><div class="ichip-val">10 mins</div></div><div class="info-chip"><div class="ichip-label">MEMBERS</div><div class="ichip-val">1</div></div></div></div>
+      <div class="modal-important"><div class="imp-title">IMPORTANT RULE</div><p>Participants cannot take part in more than one activity. Each team member must participate in only one coding activity.</p></div>
+    </div>
+  </div>
+</div>
+
+<div class="rmodal-overlay" id="rmodal4" onclick="closeRound(event,4)">
+  <div class="rmodal"><div class="rmodal-top c4"></div><button class="rmodal-close" onclick="closeRoundBtn(4)">&#x2715;</button>
+    <div class="rmodal-header"><div class="rmodal-round-tag" style="color:var(--orange)">ROUND 04</div><div class="rmodal-title">Hunting Challenge</div></div>
+    <div class="rmodal-body">
+      <p class="modal-desc">Tests attention to detail, analytical thinking and teamwork. Two exciting sub-rounds await!</p>
+      <div class="sub-round"><div class="sub-round-title" style="color:var(--orange);">i. Scavenger Hunt</div><p style="font-size:13px;color:var(--muted);margin-bottom:8px;line-height:1.6;">A PDF document with information will be provided along with an MCQ sheet. All answers are hidden within the PDF — find them by reading carefully!</p><div class="info-grid"><div class="info-chip"><div class="ichip-label">TIME</div><div class="ichip-val">30 mins</div></div><div class="info-chip"><div class="ichip-label">POINTS</div><div class="ichip-val">1 / answer</div></div></div><ul class="rule-list" style="margin-top:10px;"><li>Only one mobile phone per team allowed to view the PDF.</li><li>Search function is strictly not allowed — all answers must be found by manually reading.</li></ul></div>
+      <div class="sub-round"><div class="sub-round-title" style="color:var(--orange);">ii. Treasure Hunt</div><p style="font-size:13px;color:var(--muted);margin-bottom:8px;line-height:1.6;">A fun surprise round testing logic, decoding skills and teamwork! Teams receive a coded clue or puzzle to decipher and progress stage by stage.</p><ul class="rule-list" style="margin-top:8px;"><li>Teams progress only after successfully decoding the given clue.</li><li>A hint will be provided every 5 minutes if teams are stuck.</li></ul></div>
+      <div class="modal-important"><div class="imp-title">INTEGRITY</div><p>Any cheating or malpractice = immediate disqualification from the entire event, regardless of previous round performance.</p></div>
+    </div>
+  </div>
+</div>
+
+<!-- FORM -->
+<section class="form-section">
+  <div class="form-wrap">
+    <div class="form-card anim-6">
+      <div class="form-card-top"></div>
+      <div class="form-header">
+        <h2>Team Registration</h2>
+        <p>Fill all details carefully &mdash; one submission per team</p>
+      </div>
+      <div class="form-body">
+        <div class="field-row c2">
+          <div class="field" id="f-tn"><label>TEAM NAME</label><input type="text" id="teamName" placeholder="e.g. The Coders" maxlength="40" autocomplete="off"><div class="err-msg">Enter team name</div></div>
+          <div class="field" id="f-col"><label>COLLEGE / INSTITUTION</label><input type="text" id="college" placeholder="Your college name" autocomplete="off"><div class="err-msg">Enter college name</div></div>
+        </div>
+        <div class="field-row c2">
+          <div class="field" id="f-br"><label>BRANCH</label><select id="branch"><option value="">Select branch</option><option>BCA</option></select><div class="err-msg">Select branch</div></div>
+          <div class="field" id="f-yr"><label>YEAR OF STUDY</label><select id="year"><option value="">Select year</option><option>1st Year</option><option>2nd Year</option></select><div class="err-msg">Select year</div></div>
+        </div>
+        <div class="sec-div"><div class="sec-lbl orange">TEAM MEMBERS</div><div class="sec-line"></div><div style="font-family:'Space Mono',monospace;font-size:9px;color:var(--muted);white-space:nowrap;">4 REQUIRED</div></div>
+        <div class="member-card">
+          <div class="mtag leader">&#x1F451; TEAM LEADER</div>
+          <div class="mf-name"><div class="field" id="f-m1n"><label>FULL NAME</label><input type="text" id="m1n" placeholder="Full name" autocomplete="name"><div class="err-msg">Name required</div></div></div>
+          <div class="mf-row"><div class="field" id="f-m1p"><label>PHONE</label><input type="tel" id="m1p" placeholder="10-digit number" maxlength="10" inputmode="numeric"><div class="err-msg">Valid phone needed</div></div><div class="field" id="f-m1e"><label>EMAIL</label><input type="email" id="m1e" placeholder="email@example.com"><div class="err-msg">Valid email needed</div></div></div>
+        </div>
+        <div class="member-card">
+          <div class="mtag member">MEMBER 2</div>
+          <div class="mf-name"><div class="field" id="f-m2n"><label>FULL NAME</label><input type="text" id="m2n" placeholder="Full name" autocomplete="off"><div class="err-msg">Name required</div></div></div>
+          <div class="mf-row"><div class="field" id="f-m2p"><label>PHONE</label><input type="tel" id="m2p" placeholder="10-digit number" maxlength="10" inputmode="numeric"><div class="err-msg">Valid phone needed</div></div><div class="field" id="f-m2e"><label>EMAIL</label><input type="email" id="m2e" placeholder="email@example.com"><div class="err-msg">Valid email needed</div></div></div>
+        </div>
+        <div class="member-card">
+          <div class="mtag member">MEMBER 3</div>
+          <div class="mf-name"><div class="field" id="f-m3n"><label>FULL NAME</label><input type="text" id="m3n" placeholder="Full name" autocomplete="off"><div class="err-msg">Name required</div></div></div>
+          <div class="mf-row"><div class="field" id="f-m3p"><label>PHONE</label><input type="tel" id="m3p" placeholder="10-digit number" maxlength="10" inputmode="numeric"><div class="err-msg">Valid phone needed</div></div><div class="field" id="f-m3e"><label>EMAIL</label><input type="email" id="m3e" placeholder="email@example.com"><div class="err-msg">Valid email needed</div></div></div>
+        </div>
+        <div class="member-card">
+          <div class="mtag member">MEMBER 4</div>
+          <div class="mf-name"><div class="field" id="f-m4n"><label>FULL NAME</label><input type="text" id="m4n" placeholder="Full name" autocomplete="off"><div class="err-msg">Name required</div></div></div>
+          <div class="mf-row"><div class="field" id="f-m4p"><label>PHONE</label><input type="tel" id="m4p" placeholder="10-digit number" maxlength="10" inputmode="numeric"><div class="err-msg">Valid phone needed</div></div><div class="field" id="f-m4e"><label>EMAIL</label><input type="email" id="m4e" placeholder="email@example.com"><div class="err-msg">Valid email needed</div></div></div>
+        </div>
+        <div class="sec-div"><div class="sec-lbl purple">PAYMENT METHOD</div><div class="sec-line"></div></div>
+        <input type="radio" name="paymode" id="radio-online" value="online" checked>
+        <input type="radio" name="paymode" id="radio-offline" value="offline">
+        <div class="pay-toggle">
+          <label class="pay-opt" for="radio-online"><div class="pay-opt-icon">&#x1F4F1;</div><div class="pay-opt-title">Online Payment</div><div class="pay-opt-sub">UPI / QR Code</div></label>
+          <label class="pay-opt" for="radio-offline"><div class="pay-opt-icon">&#x1F4B5;</div><div class="pay-opt-title">Pay at Venue</div><div class="pay-opt-sub">Cash on arrival</div></label>
+        </div>
+        <div id="panel-online">
+          <div class="pay-grid">
+            <div class="qr-card">
+              <div class="qr-area"><svg width="52" height="52" viewBox="0 0 64 64" fill="none"><rect x="2" y="2" width="24" height="24" rx="3" stroke="#00f5c4" stroke-width="1.5"/><rect x="8" y="8" width="12" height="12" rx="1.5" fill="rgba(0,245,196,0.25)"/><rect x="38" y="2" width="24" height="24" rx="3" stroke="#00f5c4" stroke-width="1.5"/><rect x="44" y="8" width="12" height="12" rx="1.5" fill="rgba(0,245,196,0.25)"/><rect x="2" y="38" width="24" height="24" rx="3" stroke="#00f5c4" stroke-width="1.5"/><rect x="8" y="44" width="12" height="12" rx="1.5" fill="rgba(0,245,196,0.25)"/><rect x="38" y="38" width="6" height="6" rx="1" fill="#00f5c4" opacity="0.4"/><rect x="48" y="38" width="6" height="6" rx="1" fill="#00f5c4" opacity="0.4"/><rect x="38" y="48" width="6" height="6" rx="1" fill="#00f5c4" opacity="0.4"/><rect x="48" y="48" width="6" height="6" rx="1" fill="#00f5c4" opacity="0.4"/></svg>PASTE YOUR<br>UPI QR HERE</div>
+              <div class="qr-fee">&#8377;200</div><div class="qr-sub">PER TEAM</div>
+            </div>
+            <div>
+              <p style="font-size:13px;color:var(--muted);line-height:1.7;margin-bottom:12px;">Scan QR &#8594; Pay <strong style="color:var(--accent)">&#8377;200</strong> &#8594; Upload screenshot + TXN ID.</p>
+              <div style="background:rgba(255,107,53,0.08);border:1px solid rgba(255,107,53,0.2);border-radius:10px;padding:10px 14px;margin-bottom:12px;font-size:12px;color:var(--accent2);font-family:'Space Mono',monospace;">&#x26A0; If QR code is not available, pay cash offline at the venue.</div>
+              <div class="field" id="f-txn"><label>TRANSACTION ID / UTR</label><input type="text" id="txnId" placeholder="e.g. 408729834901" autocomplete="off"><div class="err-msg">Enter transaction ID</div></div>
+              <div style="margin-top:12px;"><label>PAYMENT SCREENSHOT</label>
+                <div class="upload-box" id="uploadBox"><input type="file" id="screenshot" accept="image/*" onchange="fileChosen(this)"><div style="font-size:26px;margin-bottom:6px;">&#x1F4F8;</div><div style="font-weight:600;font-size:13px;margin-bottom:4px;">Upload Screenshot</div><div style="font-size:11px;color:var(--muted);">Tap to select &middot; JPG or PNG</div><div class="upload-fname" id="uploadFname"></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div id="panel-offline">
+          <div class="offline-box"><div class="offline-icon">&#x1F4B5;</div><div class="offline-title">Pay at the Venue</div><p class="offline-desc">Pay <strong style="color:var(--accent)">&#8377;200 cash</strong> at the event. Spot reserved after registration.</p><div class="offline-note"><span>&#x26A0;</span><span>Bring exact change &middot; Pay before Round 1</span></div></div>
+        </div>
+        <button class="submit-btn" id="submitBtn" onclick="handleSubmit()">
+          <span id="btnText">LOCK IN MY TEAM &#8594;</span>
+          <div class="spinner" id="spinner"></div>
+        </button>
+        <div class="submit-note" id="submitNote">Registration confirmed after payment verification &middot; 24hr response</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- COORDINATORS -->
+<section class="coord-section">
+  <div class="coord-wrap">
+    <div class="section-label" style="margin-bottom:10px;">&#8212; EVENT COORDINATORS &#8212;</div>
+    <p class="section-sublabel" style="margin-bottom:24px;">Reach out for any queries</p>
+    <div class="coord-grid">
+      <div class="coord-group male">
+        <div class="coord-group-title">&#x1F464; MALE COORDINATORS</div>
+        <div class="coord-person"><div class="coord-avatar">&#x1F468;</div><div><div class="coord-name">Balaji</div><div class="coord-phone"><a href="tel:9964642345">9964642345</a></div></div></div>
+        <div class="coord-person"><div class="coord-avatar">&#x1F468;</div><div><div class="coord-name">Imran Khan</div><div class="coord-phone"><a href="tel:8880543438">8880543438</a></div></div></div>
+      </div>
+      <div class="coord-group female">
+        <div class="coord-group-title">&#x1F464; FEMALE COORDINATORS</div>
+        <div class="coord-person"><div class="coord-avatar">&#x1F469;</div><div><div class="coord-name">Pratiksha</div><div class="coord-phone"><a href="tel:7624934415">7624934415</a></div></div></div>
+        <div class="coord-person"><div class="coord-avatar">&#x1F469;</div><div><div class="coord-name">Sadhana</div><div class="coord-phone"><a href="tel:8088671345">8088671345</a></div></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SUCCESS MODAL -->
+<div class="modal" id="successModal">
+  <div class="modal-inner">
+    <span class="modal-emoji">&#x1F38A;</span>
+    <div class="modal-title">YOU'RE IN!</div>
+    <p class="modal-sub" id="successMsg">Registration received!</p>
+    <div class="modal-id" id="modalId">REG ID: --</div><br>
+    <div class="modal-email-note" id="modalEmailNote">&#x2709; &nbsp;Confirmation email sent to your leader's inbox</div>
+  </div>
+</div>
+
+
+<!-- GENERAL RULES -->
+<section style="position:relative;z-index:1;padding:10px 0 40px;">
+  <div style="max-width:860px;margin:0 auto;padding:0 24px;">
+    <div class="section-label" style="margin-bottom:10px;">&#8212; GENERAL RULES &#8212;</div>
+    <p class="section-sublabel" style="margin-bottom:24px;">Please read carefully before the event</p>
+    <div style="background:var(--card);border:1px solid rgba(255,255,255,0.06);border-radius:24px;overflow:hidden;">
+      <div style="height:3px;background:linear-gradient(90deg,var(--accent2),var(--accent3),var(--accent));"></div>
+      <div style="padding:28px 32px;">
+        <div style="display:grid;gap:14px;">
+          <div style="background:var(--surface);border:1px solid rgba(255,255,255,0.06);border-radius:14px;padding:16px 20px;display:flex;gap:16px;align-items:flex-start;">
+            <div style="background:rgba(0,245,196,0.1);border:1px solid rgba(0,245,196,0.2);border-radius:10px;padding:8px 12px;font-family:'Bebas Neue',sans-serif;font-size:20px;color:var(--accent);flex-shrink:0;line-height:1;">01</div>
+            <div><div style="font-weight:700;font-size:14px;color:var(--text);margin-bottom:4px;">Reporting Time</div><div style="font-size:13px;color:var(--muted);line-height:1.6;">The event will begin at <strong style="color:var(--accent);">8:30 AM</strong>. All participants must report to the college by <strong style="color:var(--accent);">8:15 AM</strong>.</div></div>
+          </div>
+          <div style="background:var(--surface);border:1px solid rgba(255,255,255,0.06);border-radius:14px;padding:16px 20px;display:flex;gap:16px;align-items:flex-start;">
+            <div style="background:rgba(255,59,59,0.1);border:1px solid rgba(255,59,59,0.2);border-radius:10px;padding:8px 12px;font-family:'Bebas Neue',sans-serif;font-size:20px;color:var(--red);flex-shrink:0;line-height:1;">02</div>
+            <div><div style="font-weight:700;font-size:14px;color:var(--text);margin-bottom:4px;">Punctuality</div><div style="font-size:13px;color:var(--muted);line-height:1.6;">Late arrival will not be tolerated. Any team arriving after the reporting time will be <strong style="color:var(--red);">disqualified</strong> from the event.</div></div>
+          </div>
+          <div style="background:var(--surface);border:1px solid rgba(255,255,255,0.06);border-radius:14px;padding:16px 20px;display:flex;gap:16px;align-items:flex-start;">
+            <div style="background:rgba(124,58,237,0.1);border:1px solid rgba(124,58,237,0.2);border-radius:10px;padding:8px 12px;font-family:'Bebas Neue',sans-serif;font-size:20px;color:#a78bfa;flex-shrink:0;line-height:1;">03</div>
+            <div><div style="font-weight:700;font-size:14px;color:var(--text);margin-bottom:4px;">Dress Code</div><div style="font-size:13px;color:var(--muted);line-height:1.6;">Full college uniform is <strong style="color:#a78bfa;">mandatory</strong> for all participants throughout the event.</div></div>
+          </div>
+          <div style="background:var(--surface);border:1px solid rgba(255,255,255,0.06);border-radius:14px;padding:16px 20px;display:flex;gap:16px;align-items:flex-start;">
+            <div style="background:rgba(0,245,196,0.1);border:1px solid rgba(0,245,196,0.2);border-radius:10px;padding:8px 12px;font-family:'Bebas Neue',sans-serif;font-size:20px;color:var(--accent);flex-shrink:0;line-height:1;">04</div>
+            <div><div style="font-weight:700;font-size:14px;color:var(--text);margin-bottom:4px;">Code of Conduct</div><div style="font-size:13px;color:var(--muted);line-height:1.6;">Participants and volunteers must communicate respectfully and maintain proper discipline during the event.</div></div>
+          </div>
+          <div style="background:var(--surface);border:1px solid rgba(255,255,255,0.06);border-radius:14px;padding:16px 20px;display:flex;gap:16px;align-items:flex-start;">
+            <div style="background:rgba(255,140,0,0.1);border:1px solid rgba(255,140,0,0.2);border-radius:10px;padding:8px 12px;font-family:'Bebas Neue',sans-serif;font-size:20px;color:var(--orange);flex-shrink:0;line-height:1;">05</div>
+            <div><div style="font-weight:700;font-size:14px;color:var(--text);margin-bottom:4px;">Lunch Break</div><div style="font-size:13px;color:var(--muted);line-height:1.6;">A lunch break will be provided from <strong style="color:var(--orange);">1:00 PM to 2:00 PM</strong>. All participants must return on time for the remaining rounds.</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRIZE DISTRIBUTION -->
+<section style="position:relative;z-index:1;padding:10px 0 60px;">
+  <div style="max-width:860px;margin:0 auto;padding:0 24px;">
+    <div class="section-label" style="margin-bottom:10px;">&#8212; PRIZE DISTRIBUTION &#8212;</div>
+    <p class="section-sublabel" style="margin-bottom:24px;">Win big at TECH VISTARA 3.0</p>
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;margin-bottom:20px;">
+      <div style="background:var(--card);border:1px solid rgba(255,215,0,0.2);border-radius:20px;padding:24px;text-align:center;position:relative;overflow:hidden;">
+        <div style="height:3px;background:linear-gradient(90deg,#ffd700,#ffec6e);position:absolute;top:0;left:0;right:0;"></div>
+        <div style="font-size:40px;margin-bottom:10px;">&#x1F3C6;</div>
+        <div style="font-family:'Bebas Neue',sans-serif;font-size:28px;color:#ffd700;letter-spacing:1px;">1st Place</div>
+        <div style="font-size:13px;color:var(--muted);margin-top:8px;line-height:1.7;">Trophy + <strong style="color:#ffd700;">4 Gold Medals</strong><br>(one per member)</div>
+      </div>
+      <div style="background:var(--card);border:1px solid rgba(192,192,192,0.2);border-radius:20px;padding:24px;text-align:center;position:relative;overflow:hidden;">
+        <div style="height:3px;background:linear-gradient(90deg,#c0c0c0,#e8e8e8);position:absolute;top:0;left:0;right:0;"></div>
+        <div style="font-size:40px;margin-bottom:10px;">&#x1F948;</div>
+        <div style="font-family:'Bebas Neue',sans-serif;font-size:28px;color:#c0c0c0;letter-spacing:1px;">2nd Place</div>
+        <div style="font-size:13px;color:var(--muted);margin-top:8px;line-height:1.7;"><strong style="color:#c0c0c0;">4 Silver Medals</strong><br>(one per member)</div>
+      </div>
+      <div style="background:var(--card);border:1px solid rgba(205,127,50,0.2);border-radius:20px;padding:24px;text-align:center;position:relative;overflow:hidden;">
+        <div style="height:3px;background:linear-gradient(90deg,#cd7f32,#e8a96a);position:absolute;top:0;left:0;right:0;"></div>
+        <div style="font-size:40px;margin-bottom:10px;">&#x1F949;</div>
+        <div style="font-family:'Bebas Neue',sans-serif;font-size:28px;color:#cd7f32;letter-spacing:1px;">3rd Place</div>
+        <div style="font-size:13px;color:var(--muted);margin-top:8px;line-height:1.7;"><strong style="color:#cd7f32;">Certificates</strong><br>of Achievement</div>
+      </div>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;">
+      <div style="background:var(--card);border:1px solid rgba(0,245,196,0.15);border-radius:16px;padding:20px;display:flex;align-items:center;gap:16px;">
+        <div style="font-size:32px;">&#x1F4DC;</div>
+        <div><div style="font-weight:700;font-size:14px;color:var(--accent);margin-bottom:4px;">All Participants</div><div style="font-size:13px;color:var(--muted);line-height:1.6;">Participation certificate for every team member in recognition of their involvement.</div></div>
+      </div>
+      <div style="background:var(--card);border:1px solid rgba(255,215,0,0.15);border-radius:16px;padding:20px;display:flex;align-items:center;gap:16px;">
+        <div style="font-size:32px;">&#x1F3C5;</div>
+        <div><div style="font-weight:700;font-size:14px;color:#ffd700;margin-bottom:4px;">General Championship</div><div style="font-size:13px;color:var(--muted);line-height:1.6;">The overall best performing team across all rounds wins the General Championship Trophy.</div></div>
+      </div>
+    </div>
+    <div style="text-align:center;margin-top:16px;font-family:'Space Mono',monospace;font-size:11px;color:var(--muted);background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.06);border-radius:10px;padding:12px;">
+      &#x1F3AD; Prize distribution ceremony will take place at the end of the event
+    </div>
+  </div>
+</section>
+
+<footer>TECH VISTARA 3.0 &nbsp;&middot;&nbsp; BCA Department &nbsp;&middot;&nbsp; SMD College<br>&#169; 2026 All rights reserved</footer>
+
+<script>
+var EJS_PUBLIC_KEY = 'CqhG9Vb1ukZtvl6js';
+var EJS_SERVICE_ID = 'service_5zb32kf';
+var EJS_TEMPLATE_ID = 'template_xojj1em';
+var EJS_STUDENT_TEMPLATE_ID = 'template_x7fmwjv';
+var SHEETS_URL = 'https://script.google.com/macros/s/AKfycbyBphnkwhvBYod3vvXWH5lfOe0eGrpZEer8_DPrxrOC-Lt5EKqrrTQYzCbWog3hZiB5lQ/exec';
+
+function openRound(n){document.getElementById('rmodal'+n).classList.add('show');document.body.style.overflow='hidden';}
+function closeRound(e,n){if(e.target===document.getElementById('rmodal'+n)){document.getElementById('rmodal'+n).classList.remove('show');document.body.style.overflow='';}}
+function closeRoundBtn(n){document.getElementById('rmodal'+n).classList.remove('show');document.body.style.overflow='';}
+document.addEventListener('keydown',function(e){if(e.key==='Escape'){[1,2,3,4].forEach(function(n){document.getElementById('rmodal'+n).classList.remove('show');});document.body.style.overflow='';}});
+
+function fileChosen(inp){if(inp.files[0]){document.getElementById('uploadBox').classList.add('done');var fn=document.getElementById('uploadFname');fn.style.display='block';fn.textContent='\u2713 '+inp.files[0].name;}}
+function setErr(id,show){var el=document.getElementById(id);if(el){show?el.classList.add('err'):el.classList.remove('err');}}
+function validEmail(e){return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(e);}
+function validPhone(p){return /^[6-9]\d{9}$/.test(p);}
+
+var registeredTeams = [];
+
+function handleSubmit(){
+  var isOffline = document.getElementById('radio-offline').checked;
+  var teamName = document.getElementById('teamName').value.trim();
+  var ok = true;
+
+  var tnErrEl = document.querySelector('#f-tn .err-msg');
+  if(registeredTeams.indexOf(teamName.toLowerCase()) !== -1){
+    setErr('f-tn', true);
+    if(tnErrEl) tnErrEl.textContent = 'Team name already taken! Choose a different name.';
+    document.getElementById('teamName').scrollIntoView({behavior:'smooth', block:'center'});
+    return;
+  }
+  if(tnErrEl) tnErrEl.textContent = 'Enter team name';
+
+  [{id:'f-tn',val:teamName},
+   {id:'f-col',val:document.getElementById('college').value.trim()},
+   {id:'f-br',val:document.getElementById('branch').value},
+   {id:'f-yr',val:document.getElementById('year').value}
+  ].forEach(function(f){var e=!f.val;setErr(f.id,e);if(e)ok=false;});
+
+  for(var i=1;i<=4;i++){
+    var n=document.getElementById('m'+i+'n').value.trim();
+    var p=document.getElementById('m'+i+'p').value.trim();
+    var e=document.getElementById('m'+i+'e').value.trim();
+    setErr('f-m'+i+'n',!n);if(!n)ok=false;
+    setErr('f-m'+i+'p',!validPhone(p));if(!validPhone(p))ok=false;
+    setErr('f-m'+i+'e',!validEmail(e));if(!validEmail(e))ok=false;
+  }
+  if(!isOffline){
+    var txn=document.getElementById('txnId').value.trim();
+    setErr('f-txn',!txn);if(!txn)ok=false;
+    if(!document.getElementById('screenshot').files.length){document.getElementById('uploadBox').style.borderColor='var(--red)';ok=false;}
+  }
+  if(!ok){var first=document.querySelector('.err');if(first)first.scrollIntoView({behavior:'smooth',block:'center'});return;}
+
+  document.getElementById('submitBtn').disabled = true;
+  document.getElementById('btnText').textContent = 'SUBMITTING...';
+  document.getElementById('spinner').style.display = 'block';
+
+  var regId = 'TV' + Date.now().toString().slice(-6);
+  var leaderEmail = document.getElementById('m1e').value.trim();
+  var leaderName = document.getElementById('m1n').value.trim();
+
+  var params = {
+    reg_id:regId, team_name:teamName,
+    college:document.getElementById('college').value.trim(),
+    branch:document.getElementById('branch').value,
+    year:document.getElementById('year').value,
+    payment_mode:isOffline?'Offline (Cash at Venue)':'Online (UPI)',
+    txn_id:isOffline?'N/A':document.getElementById('txnId').value.trim(),
+    m1n:document.getElementById('m1n').value.trim(),m1p:document.getElementById('m1p').value.trim(),m1e:leaderEmail,
+    m2n:document.getElementById('m2n').value.trim(),m2p:document.getElementById('m2p').value.trim(),m2e:document.getElementById('m2e').value.trim(),
+    m3n:document.getElementById('m3n').value.trim(),m3p:document.getElementById('m3p').value.trim(),m3e:document.getElementById('m3e').value.trim(),
+    m4n:document.getElementById('m4n').value.trim(),m4p:document.getElementById('m4p').value.trim(),m4e:document.getElementById('m4e').value.trim()
+  };
+
+  // Google Sheets — no-cors (Apps Script requirement)
+  fetch(SHEETS_URL, {
+    method: 'POST',
+    mode: 'no-cors',
+    headers: {'Content-Type': 'application/json'},
+    body: JSON.stringify(params)
+  }).catch(function(){});
+
+  // EmailJS
+  emailjs.init(EJS_PUBLIC_KEY);
+  emailjs.send(EJS_SERVICE_ID, EJS_TEMPLATE_ID, params).catch(function(e){console.warn('Admin email error:', e);});
+  emailjs.send(EJS_SERVICE_ID, EJS_STUDENT_TEMPLATE_ID, {
+    to_email: leaderEmail,
+    to_name: leaderName,
+    reg_id: regId,
+    team_name: teamName,
+    payment_mode: params.payment_mode,
+    event_date: '28 March 2026',
+    venue: 'Seminar Hall, SMD College'
+  }).catch(function(e){console.warn('Student email error:', e);});
+
+  registeredTeams.push(teamName.toLowerCase());
+
+  document.getElementById('modalId').textContent = 'REG ID: ' + regId;
+  document.getElementById('successMsg').textContent = isOffline
+    ? 'Registration received! Pay Rs.200 cash at the venue before 25 March 2026. Your spot is reserved!'
+    : 'Registration received! We will verify payment and confirm within 24 hours. See you at the arena!';
+  document.getElementById('successModal').classList.add('show');
+}
+</script>
+</body>
+</html>

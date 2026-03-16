@@ -134,38 +134,10 @@ select option{background:var(--surface);}
 .mtag.member{background:rgba(255,255,255,0.05);color:var(--muted);border:1px solid rgba(255,255,255,0.08);}
 .mf-name{margin-bottom:10px;}
 .mf-row{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
-input[type=radio]{display:none;}
-.pay-toggle{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:4px;}
-.pay-opt{background:var(--surface);border:2px solid rgba(255,255,255,0.07);border-radius:16px;padding:18px;text-align:center;cursor:pointer;transition:all 0.25s;position:relative;display:block;}
-.pay-opt:hover{border-color:rgba(0,245,196,0.25);transform:translateY(-2px);}
-#radio-online:checked ~ .pay-toggle label[for="radio-online"],
-#radio-offline:checked ~ .pay-toggle label[for="radio-offline"]{border-color:var(--accent);background:rgba(0,245,196,0.07);box-shadow:0 0 24px rgba(0,245,196,0.1);}
-#radio-online:checked ~ .pay-toggle label[for="radio-online"]::after,
-#radio-offline:checked ~ .pay-toggle label[for="radio-offline"]::after{content:"\2713";position:absolute;top:10px;right:14px;font-size:13px;color:var(--accent);font-weight:700;}
-.pay-opt-icon{font-size:24px;margin-bottom:8px;}
-.pay-opt-title{font-weight:700;font-size:14px;color:var(--text);}
-.pay-opt-sub{font-size:10px;color:var(--muted);margin-top:2px;font-family:'Space Mono',monospace;}
-#panel-online{display:block;}
-#panel-offline{display:none;}
-#radio-offline:checked ~ #panel-online{display:none;}
-#radio-offline:checked ~ #panel-offline{display:block;}
-#radio-online:checked ~ #panel-online{display:block;}
-#radio-online:checked ~ #panel-offline{display:none;}
-.pay-grid{display:grid;grid-template-columns:170px 1fr;gap:24px;align-items:start;margin-top:16px;}
-.qr-card{background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:14px;text-align:center;}
-.qr-area{width:100%;aspect-ratio:1;background:rgba(0,245,196,0.04);border:2px dashed rgba(0,245,196,0.25);border-radius:12px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;font-size:10px;color:var(--muted);font-family:'Space Mono',monospace;margin-bottom:10px;padding:10px;line-height:1.6;}
-.qr-fee{font-family:'Bebas Neue',sans-serif;font-size:24px;color:var(--accent);line-height:1;}
-.qr-sub{font-size:10px;color:var(--muted);font-family:'Space Mono',monospace;letter-spacing:1px;}
-.upload-box{border:2px dashed rgba(124,58,237,0.3);border-radius:14px;padding:20px;text-align:center;cursor:pointer;position:relative;transition:border-color 0.2s,background 0.2s;margin-top:12px;}
-.upload-box:hover,.upload-box:focus-within{border-color:var(--accent3);background:rgba(124,58,237,0.05);}
-.upload-box.done{border-color:var(--accent);background:rgba(0,245,196,0.04);}
-.upload-box input[type=file]{position:absolute;inset:0;opacity:0;cursor:pointer;width:100%;height:100%;border:none!important;padding:0!important;background:none!important;box-shadow:none!important;transform:none!important;}
-.upload-fname{font-family:'Space Mono',monospace;font-size:11px;color:var(--accent);margin-top:8px;display:none;}
 .offline-box{background:rgba(255,107,53,0.05);border:1px solid rgba(255,107,53,0.2);border-radius:16px;padding:24px;margin-top:16px;text-align:center;}
 .offline-icon{font-size:40px;margin-bottom:10px;}
 .offline-title{font-family:'Bebas Neue',sans-serif;font-size:24px;letter-spacing:1px;color:var(--accent2);margin-bottom:10px;}
-.offline-desc{font-size:14px;color:var(--muted);line-height:1.8;margin-bottom:14px;}
-.offline-note{display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:100px;padding:8px 16px;font-size:11px;color:var(--muted);font-family:'Space Mono',monospace;}
+.offline-desc{font-size:14px;color:var(--muted);line-height:1.8;}
 .submit-btn{width:100%;background:linear-gradient(135deg,var(--accent),#00c9a7);color:#000;border:none;border-radius:16px;padding:18px;font-family:'Bebas Neue',sans-serif;font-size:22px;letter-spacing:2px;cursor:pointer;transition:transform 0.25s,box-shadow 0.25s;margin-top:24px;display:flex;align-items:center;justify-content:center;gap:10px;}
 .submit-btn:hover{transform:translateY(-3px);box-shadow:0 10px 40px rgba(0,245,196,0.35);}
 .submit-btn:active{transform:translateY(-1px);}
@@ -201,13 +173,12 @@ input[type=radio]{display:none;}
 footer{text-align:center;padding:28px 24px 36px;color:var(--muted);font-size:12px;font-family:'Space Mono',monospace;position:relative;z-index:1;line-height:2.2;border-top:1px solid rgba(255,255,255,0.05);margin-top:20px;}
 @media(max-width:768px){
   .rounds-grid{grid-template-columns:1fr 1fr;gap:10px;padding:0 16px;}
-  [style*="grid-template-columns:1fr 1fr 1fr"]{grid-template-columns:1fr!important;}
-  [style*="grid-template-columns:1fr 1fr"]:not(.pay-toggle):not(.mf-row):not(.c2):not(.coord-grid){grid-template-columns:1fr!important;}
   .coord-grid{grid-template-columns:1fr;}
-  .pay-grid{grid-template-columns:1fr;}
   .form-header{padding:22px 20px 18px;}
   .form-body{padding:20px;}
   .form-wrap{padding:0 16px;}
+  .prize-cols{grid-template-columns:1fr!important;}
+  .prize-bottom{grid-template-columns:1fr!important;}
 }
 @media(max-width:500px){
   .hero{padding:56px 16px 28px;}
@@ -220,8 +191,6 @@ footer{text-align:center;padding:28px 24px 36px;color:var(--muted);font-size:12p
   .round-name{font-size:12px;}
   .c2{grid-template-columns:1fr;}
   .mf-row{grid-template-columns:1fr;}
-  .pay-toggle{gap:8px;}
-  .pay-opt{padding:14px 10px;}
   .submit-btn{font-size:18px;padding:16px;}
   .modal-title{font-size:44px;}
   label{font-size:9px;}
@@ -231,24 +200,18 @@ footer{text-align:center;padding:28px 24px 36px;color:var(--muted);font-size:12p
   .rmodal-title{font-size:26px;}
   .rmodal-body{padding:14px 16px 20px;}
 }
-@media(max-width:360px){
-  .rounds-grid{grid-template-columns:1fr;}
-}
+@media(max-width:360px){.rounds-grid{grid-template-columns:1fr;}}
 </style>
 </head>
 <body>
 <div class="orb orb1"></div>
 <div class="orb orb2"></div>
 <div class="orb orb3"></div>
-
 <a class="back-btn" href="index.html">&#8592; BACK</a>
 
 <section class="hero">
   <div class="badge anim-1">BCA DEPARTMENT &nbsp;&middot;&nbsp; SMD COLLEGE</div>
-  <h1 class="hero-title anim-2">
-    <span class="line1">TECH</span>
-    <span class="line2">VISTARA 3.0</span>
-  </h1>
+  <h1 class="hero-title anim-2"><span class="line1">TECH</span><span class="line2">VISTARA 3.0</span></h1>
   <p class="hero-sub anim-3">28 March 2026 &nbsp;&middot;&nbsp; Seminar Hall &nbsp;&middot;&nbsp; <span>Register Your Team</span></p>
   <div class="info-pills anim-4">
     <div class="info-pill accent"><span>&#x1F4B0;</span><span>Fee <strong>&#8377;200</strong></span></div>
@@ -263,7 +226,7 @@ footer{text-align:center;padding:28px 24px 36px;color:var(--muted);font-size:12p
   <div class="rounds-grid anim-6">
     <div class="round-card" onclick="openRound(1)">
       <div class="round-num">01</div><div class="round-icon">&#x1F9E0;</div>
-      <div class="round-name">Technical Quiz</div><div class="round-subtitle">3 PHASES</div>
+      <div class="round-name">Tech Trivia</div><div class="round-subtitle">3 PHASES</div>
       <div class="round-desc">80 questions. Faster = more points.</div>
       <div class="click-hint">&#x1F4CB; Rules</div>
     </div>
@@ -275,13 +238,13 @@ footer{text-align:center;padding:28px 24px 36px;color:var(--muted);font-size:12p
     </div>
     <div class="round-card" onclick="openRound(3)">
       <div class="round-num">03</div><div class="round-icon">&#x1F4BB;</div>
-      <div class="round-name">Coding Challenge</div><div class="round-subtitle">3 ACTIVITIES</div>
+      <div class="round-name">Code Chaos</div><div class="round-subtitle">3 ACTIVITIES</div>
       <div class="round-desc">Reverse, debug &amp; blind coding.</div>
       <div class="click-hint">&#x1F4CB; Rules</div>
     </div>
     <div class="round-card" onclick="openRound(4)">
       <div class="round-num">04</div><div class="round-icon">&#x1F5FA;&#xFE0F;</div>
-      <div class="round-name">Hunting Challenge</div><div class="round-subtitle">SCAVENGER + TREASURE</div>
+      <div class="round-name">Hunting Quest</div><div class="round-subtitle">SCAVENGER + TREASURE</div>
       <div class="round-desc">Clues, puzzles, teamwork.</div>
       <div class="click-hint">&#x1F4CB; Rules</div>
     </div>
@@ -291,12 +254,12 @@ footer{text-align:center;padding:28px 24px 36px;color:var(--muted);font-size:12p
 <!-- ROUND MODALS -->
 <div class="rmodal-overlay" id="rmodal1" onclick="closeRound(event,1)">
   <div class="rmodal"><div class="rmodal-top c1"></div><button class="rmodal-close" onclick="closeRoundBtn(1)">&#x2715;</button>
-    <div class="rmodal-header"><div class="rmodal-round-tag" style="color:var(--accent)">ROUND 01</div><div class="rmodal-title">Technical Quiz</div></div>
+    <div class="rmodal-header"><div class="rmodal-round-tag" style="color:var(--accent)">ROUND 01</div><div class="rmodal-title">Tech Trivia</div></div>
     <div class="rmodal-body">
-      <p class="modal-desc">Two phases with increasing difficulty. Faster responses earn higher points. Questions cover trending tech topics and academic syllabus.</p>
-      <div class="sub-round"><div class="sub-round-title"><span>Easy Level</span><span class="tag" style="background:rgba(0,245,196,0.1);color:var(--accent);border:1px solid rgba(0,245,196,0.2);">PHASE 1</span></div><div class="info-grid"><div class="info-chip"><div class="ichip-label">QUESTIONS</div><div class="ichip-val">30</div></div><div class="info-chip"><div class="ichip-label">TIME/Q</div><div class="ichip-val">15 sec</div></div></div></div>
-      <div class="sub-round"><div class="sub-round-title"><span>Medium Level</span><span class="tag" style="background:rgba(255,140,0,0.1);color:var(--orange);border:1px solid rgba(255,140,0,0.2);">PHASE 2</span></div><div class="info-grid"><div class="info-chip"><div class="ichip-label">QUESTIONS</div><div class="ichip-val">30</div></div><div class="info-chip"><div class="ichip-label">TIME/Q</div><div class="ichip-val">25 sec</div></div></div></div>
-      <div class="sub-round"><div class="sub-round-title"><span>Hard Level</span><span class="tag" style="background:rgba(255,59,59,0.1);color:var(--red);border:1px solid rgba(255,59,59,0.2);">PHASE 3</span></div><div class="info-grid"><div class="info-chip"><div class="ichip-label">QUESTIONS</div><div class="ichip-val">20</div></div><div class="info-chip"><div class="ichip-label">TIME/Q</div><div class="ichip-val">40 sec</div></div></div></div>
+      <p class="modal-desc">Three phases with increasing difficulty. Faster responses earn higher points. Questions cover trending tech topics and academic syllabus.</p>
+      <div class="sub-round"><div class="sub-round-title"><span>Easy Level</span><span class="tag" style="background:rgba(0,245,196,0.1);color:var(--accent);border:1px solid rgba(0,245,196,0.2);">PHASE 1</span></div><div class="info-grid"><div class="info-chip"><div class="ichip-label">QUESTIONS</div><div class="ichip-val">30</div></div><div class="info-chip"><div class="ichip-label">OVERALL TIME</div><div class="ichip-val">15 mins</div></div></div></div>
+      <div class="sub-round"><div class="sub-round-title"><span>Medium Level</span><span class="tag" style="background:rgba(255,140,0,0.1);color:var(--orange);border:1px solid rgba(255,140,0,0.2);">PHASE 2</span></div><div class="info-grid"><div class="info-chip"><div class="ichip-label">QUESTIONS</div><div class="ichip-val">30</div></div><div class="info-chip"><div class="ichip-label">OVERALL TIME</div><div class="ichip-val">45 mins</div></div></div></div>
+      <div class="sub-round"><div class="sub-round-title"><span>Hard Level</span><span class="tag" style="background:rgba(255,59,59,0.1);color:var(--red);border:1px solid rgba(255,59,59,0.2);">PHASE 3</span></div><div class="info-grid"><div class="info-chip"><div class="ichip-label">QUESTIONS</div><div class="ichip-val">20</div></div><div class="info-chip"><div class="ichip-label">OVERALL TIME</div><div class="ichip-val">10 mins</div></div></div></div>
       <div class="modal-important"><div class="imp-title">RULES</div><ul class="rule-list"><li>Faster responses earn higher points.</li><li>Questions cover trending technology topics and academic syllabus.</li><li>One-third of teams eliminated after each sub-round based on scores.</li></ul></div>
     </div>
   </div>
@@ -306,7 +269,7 @@ footer{text-align:center;padding:28px 24px 36px;color:var(--muted);font-size:12p
   <div class="rmodal"><div class="rmodal-top c2"></div><button class="rmodal-close" onclick="closeRoundBtn(2)">&#x2715;</button>
     <div class="rmodal-header"><div class="rmodal-round-tag" style="color:var(--red)">ROUND 02</div><div class="rmodal-title">404 - Round Not Found</div></div>
     <div class="rmodal-body">
-      <div class="glitch-box"><div class="gl-title">ERROR DETECTED.</div>Round details missing. Attempting recovery...<br><br>This round contains three unexpected sub-rounds.<br><br>But the rules might not always be obvious.<br><br>You may need to decode clues, solve riddles, think differently.<br><br><strong style="color:var(--red)">404 - Information Not Found.</strong><br><br>Good luck. You might need it.</div>
+      <div class="glitch-box"><div class="gl-title">ERROR DETECTED.</div>Round details missing. Attempting recovery...<br><br>This round contains three unexpected sub-rounds designed to test your creativity, quick thinking, and ability to solve riddles in the most unusual ways.<br><br>But here's the catch... the rules might not always be obvious.<br><br>You may need to decode clues, solve riddles, think differently, or simply embrace the chaos and enjoy the challenge.<br><br><strong style="color:var(--red)">404 - Information Not Found.</strong><br><br>Good luck. You might need it.</div>
       <div class="modal-important"><div class="imp-title">NOTE</div><p>Sub-round details are classified. Show up and find out. &#x1F608;</p></div>
     </div>
   </div>
@@ -314,7 +277,7 @@ footer{text-align:center;padding:28px 24px 36px;color:var(--muted);font-size:12p
 
 <div class="rmodal-overlay" id="rmodal3" onclick="closeRound(event,3)">
   <div class="rmodal"><div class="rmodal-top c3"></div><button class="rmodal-close" onclick="closeRoundBtn(3)">&#x2715;</button>
-    <div class="rmodal-header"><div class="rmodal-round-tag" style="color:var(--accent3)">ROUND 03</div><div class="rmodal-title">Coding Challenge</div></div>
+    <div class="rmodal-header"><div class="rmodal-round-tag" style="color:var(--accent3)">ROUND 03</div><div class="rmodal-title">Code Chaos</div></div>
     <div class="rmodal-body">
       <p class="modal-desc">No elimination round. Evaluates coding skills, logical thinking and debugging ability. Each member does exactly one activity.</p>
       <div class="sub-round"><div class="sub-round-title" style="color:#a78bfa;">i. Reverse Coding <span class="tag" style="background:rgba(124,58,237,0.1);color:#a78bfa;border:1px solid rgba(124,58,237,0.2);">2 MEMBERS</span></div><p style="font-size:13px;color:var(--muted);margin-bottom:8px;line-height:1.6;">Participants will be given the expected program output on paper. Write the code that produces the given output and execute it.</p><div class="info-grid"><div class="info-chip"><div class="ichip-label">TIME</div><div class="ichip-val">15-20 mins</div></div><div class="info-chip"><div class="ichip-label">MEMBERS</div><div class="ichip-val">2</div></div></div></div>
@@ -327,11 +290,11 @@ footer{text-align:center;padding:28px 24px 36px;color:var(--muted);font-size:12p
 
 <div class="rmodal-overlay" id="rmodal4" onclick="closeRound(event,4)">
   <div class="rmodal"><div class="rmodal-top c4"></div><button class="rmodal-close" onclick="closeRoundBtn(4)">&#x2715;</button>
-    <div class="rmodal-header"><div class="rmodal-round-tag" style="color:var(--orange)">ROUND 04</div><div class="rmodal-title">Hunting Challenge</div></div>
+    <div class="rmodal-header"><div class="rmodal-round-tag" style="color:var(--orange)">ROUND 04</div><div class="rmodal-title">Hunting Quest</div></div>
     <div class="rmodal-body">
       <p class="modal-desc">Tests attention to detail, analytical thinking and teamwork. Two exciting sub-rounds await!</p>
-      <div class="sub-round"><div class="sub-round-title" style="color:var(--orange);">i. Scavenger Hunt</div><p style="font-size:13px;color:var(--muted);margin-bottom:8px;line-height:1.6;">A PDF document with information will be provided along with an MCQ sheet. All answers are hidden within the PDF — find them by reading carefully!</p><div class="info-grid"><div class="info-chip"><div class="ichip-label">TIME</div><div class="ichip-val">30 mins</div></div><div class="info-chip"><div class="ichip-label">POINTS</div><div class="ichip-val">1 / answer</div></div></div><ul class="rule-list" style="margin-top:10px;"><li>Only one mobile phone per team allowed to view the PDF.</li><li>Search function is strictly not allowed — all answers must be found by manually reading.</li></ul></div>
-      <div class="sub-round"><div class="sub-round-title" style="color:var(--orange);">ii. Treasure Hunt</div><p style="font-size:13px;color:var(--muted);margin-bottom:8px;line-height:1.6;">A fun surprise round testing logic, decoding skills and teamwork! Teams receive a coded clue or puzzle to decipher and progress stage by stage.</p><ul class="rule-list" style="margin-top:8px;"><li>Teams progress only after successfully decoding the given clue.</li><li>A hint will be provided every 5 minutes if teams are stuck.</li></ul></div>
+      <div class="sub-round"><div class="sub-round-title" style="color:var(--orange);">i. Scavenger Hunt</div><p style="font-size:13px;color:var(--muted);margin-bottom:8px;line-height:1.6;">A PDF document with information will be provided along with an MCQ sheet. All answers are hidden within the PDF.</p><div class="info-grid"><div class="info-chip"><div class="ichip-label">TIME</div><div class="ichip-val">30 mins</div></div><div class="info-chip"><div class="ichip-label">POINTS</div><div class="ichip-val">1 / answer</div></div></div><ul class="rule-list" style="margin-top:10px;"><li>Only one mobile phone per team allowed to view the PDF.</li><li>Search function is strictly not allowed.</li></ul></div>
+      <div class="sub-round"><div class="sub-round-title" style="color:var(--orange);">ii. Treasure Hunt</div><p style="font-size:13px;color:var(--muted);margin-bottom:8px;line-height:1.6;">A fun surprise round testing logic, decoding skills and teamwork! Teams receive a coded clue or puzzle to decipher and progress stage by stage.</p><ul class="rule-list" style="margin-top:8px;"><li>Teams progress only after successfully decoding the given clue.</li><li>A hint will be provided every 5 minutes if stuck.</li></ul></div>
       <div class="modal-important"><div class="imp-title">INTEGRITY</div><p>Any cheating or malpractice = immediate disqualification from the entire event, regardless of previous round performance.</p></div>
     </div>
   </div>
@@ -376,38 +339,101 @@ footer{text-align:center;padding:28px 24px 36px;color:var(--muted);font-size:12p
           <div class="mf-name"><div class="field" id="f-m4n"><label>FULL NAME</label><input type="text" id="m4n" placeholder="Full name" autocomplete="off"><div class="err-msg">Name required</div></div></div>
           <div class="mf-row"><div class="field" id="f-m4p"><label>PHONE</label><input type="tel" id="m4p" placeholder="10-digit number" maxlength="10" inputmode="numeric"><div class="err-msg">Valid phone needed</div></div><div class="field" id="f-m4e"><label>EMAIL</label><input type="email" id="m4e" placeholder="email@example.com"><div class="err-msg">Valid email needed</div></div></div>
         </div>
-        <div class="sec-div"><div class="sec-lbl purple">PAYMENT METHOD</div><div class="sec-line"></div></div>
-        <input type="radio" name="paymode" id="radio-online" value="online" checked>
-        <input type="radio" name="paymode" id="radio-offline" value="offline">
-        <div class="pay-toggle">
-          <label class="pay-opt" for="radio-online"><div class="pay-opt-icon">&#x1F4F1;</div><div class="pay-opt-title">Online Payment</div><div class="pay-opt-sub">UPI / QR Code</div></label>
-          <label class="pay-opt" for="radio-offline"><div class="pay-opt-icon">&#x1F4B5;</div><div class="pay-opt-title">Pay at Venue</div><div class="pay-opt-sub">Cash on arrival</div></label>
+
+        <div class="sec-div"><div class="sec-lbl purple">PAYMENT</div><div class="sec-line"></div></div>
+        <div class="offline-box">
+          <div class="offline-icon">&#x1F4B5;</div>
+          <div class="offline-title">Pay at the Venue</div>
+          <p class="offline-desc">Pay <strong style="color:var(--accent)">&#8377;200 cash</strong> at the event on arrival. Your spot is reserved after registration.</p>
         </div>
-        <div id="panel-online">
-          <div class="pay-grid">
-            <div class="qr-card">
-              <div class="qr-area"><svg width="52" height="52" viewBox="0 0 64 64" fill="none"><rect x="2" y="2" width="24" height="24" rx="3" stroke="#00f5c4" stroke-width="1.5"/><rect x="8" y="8" width="12" height="12" rx="1.5" fill="rgba(0,245,196,0.25)"/><rect x="38" y="2" width="24" height="24" rx="3" stroke="#00f5c4" stroke-width="1.5"/><rect x="44" y="8" width="12" height="12" rx="1.5" fill="rgba(0,245,196,0.25)"/><rect x="2" y="38" width="24" height="24" rx="3" stroke="#00f5c4" stroke-width="1.5"/><rect x="8" y="44" width="12" height="12" rx="1.5" fill="rgba(0,245,196,0.25)"/><rect x="38" y="38" width="6" height="6" rx="1" fill="#00f5c4" opacity="0.4"/><rect x="48" y="38" width="6" height="6" rx="1" fill="#00f5c4" opacity="0.4"/><rect x="38" y="48" width="6" height="6" rx="1" fill="#00f5c4" opacity="0.4"/><rect x="48" y="48" width="6" height="6" rx="1" fill="#00f5c4" opacity="0.4"/></svg>PASTE YOUR<br>UPI QR HERE</div>
-              <div class="qr-fee">&#8377;200</div><div class="qr-sub">PER TEAM</div>
-            </div>
-            <div>
-              <p style="font-size:13px;color:var(--muted);line-height:1.7;margin-bottom:12px;">Scan QR &#8594; Pay <strong style="color:var(--accent)">&#8377;200</strong> &#8594; Upload screenshot + TXN ID.</p>
-              <div style="background:rgba(255,107,53,0.08);border:1px solid rgba(255,107,53,0.2);border-radius:10px;padding:10px 14px;margin-bottom:12px;font-size:12px;color:var(--accent2);font-family:'Space Mono',monospace;">&#x26A0; If QR code is not available, pay cash offline at the venue.</div>
-              <div class="field" id="f-txn"><label>TRANSACTION ID / UTR</label><input type="text" id="txnId" placeholder="e.g. 408729834901" autocomplete="off"><div class="err-msg">Enter transaction ID</div></div>
-              <div style="margin-top:12px;"><label>PAYMENT SCREENSHOT</label>
-                <div class="upload-box" id="uploadBox"><input type="file" id="screenshot" accept="image/*" onchange="fileChosen(this)"><div style="font-size:26px;margin-bottom:6px;">&#x1F4F8;</div><div style="font-weight:600;font-size:13px;margin-bottom:4px;">Upload Screenshot</div><div style="font-size:11px;color:var(--muted);">Tap to select &middot; JPG or PNG</div><div class="upload-fname" id="uploadFname"></div></div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div id="panel-offline">
-          <div class="offline-box"><div class="offline-icon">&#x1F4B5;</div><div class="offline-title">Pay at the Venue</div><p class="offline-desc">Pay <strong style="color:var(--accent)">&#8377;200 cash</strong> at the event. Spot reserved after registration.</p><div class="offline-note"><span>&#x26A0;</span><span>Bring exact change &middot; Pay before Round 1</span></div></div>
-        </div>
+
         <button class="submit-btn" id="submitBtn" onclick="handleSubmit()">
           <span id="btnText">LOCK IN MY TEAM &#8594;</span>
           <div class="spinner" id="spinner"></div>
         </button>
-        <div class="submit-note" id="submitNote">Registration confirmed after payment verification &middot; 24hr response</div>
+        <div class="submit-note">Registration closes 25 March 2026 &middot; Pay cash at venue on event day</div>
       </div>
+    </div>
+  </div>
+</section>
+
+<!-- GENERAL RULES -->
+<section style="position:relative;z-index:1;padding:10px 0 40px;">
+  <div style="max-width:860px;margin:0 auto;padding:0 24px;">
+    <div class="section-label" style="margin-bottom:10px;">&#8212; GENERAL RULES &#8212;</div>
+    <p class="section-sublabel" style="margin-bottom:24px;">Please read carefully before the event</p>
+    <div style="background:var(--card);border:1px solid rgba(255,255,255,0.06);border-radius:24px;overflow:hidden;">
+      <div style="height:3px;background:linear-gradient(90deg,var(--accent2),var(--accent3),var(--accent));"></div>
+      <div style="padding:28px 32px;display:grid;gap:14px;">
+        <div style="background:var(--surface);border:1px solid rgba(255,255,255,0.06);border-radius:14px;padding:16px 20px;display:flex;gap:16px;align-items:flex-start;">
+          <div style="background:rgba(0,245,196,0.1);border:1px solid rgba(0,245,196,0.2);border-radius:10px;padding:8px 12px;font-family:'Bebas Neue',sans-serif;font-size:20px;color:var(--accent);flex-shrink:0;line-height:1;min-width:42px;text-align:center;">01</div>
+          <div><div style="font-weight:700;font-size:14px;color:var(--text);margin-bottom:4px;">Reporting Time</div><div style="font-size:13px;color:var(--muted);line-height:1.6;">The event will begin at <strong style="color:var(--accent);">8:30 AM</strong>. All participants must report to the college by <strong style="color:var(--accent);">8:15 AM</strong>.</div></div>
+        </div>
+        <div style="background:var(--surface);border:1px solid rgba(255,255,255,0.06);border-radius:14px;padding:16px 20px;display:flex;gap:16px;align-items:flex-start;">
+          <div style="background:rgba(255,59,59,0.1);border:1px solid rgba(255,59,59,0.2);border-radius:10px;padding:8px 12px;font-family:'Bebas Neue',sans-serif;font-size:20px;color:var(--red);flex-shrink:0;line-height:1;min-width:42px;text-align:center;">02</div>
+          <div><div style="font-weight:700;font-size:14px;color:var(--text);margin-bottom:4px;">Punctuality</div><div style="font-size:13px;color:var(--muted);line-height:1.6;">Late arrival will not be tolerated. Any team arriving after the reporting time will be <strong style="color:var(--red);">disqualified</strong> from the event.</div></div>
+        </div>
+        <div style="background:var(--surface);border:1px solid rgba(255,255,255,0.06);border-radius:14px;padding:16px 20px;display:flex;gap:16px;align-items:flex-start;">
+          <div style="background:rgba(124,58,237,0.1);border:1px solid rgba(124,58,237,0.2);border-radius:10px;padding:8px 12px;font-family:'Bebas Neue',sans-serif;font-size:20px;color:#a78bfa;flex-shrink:0;line-height:1;min-width:42px;text-align:center;">03</div>
+          <div><div style="font-weight:700;font-size:14px;color:var(--text);margin-bottom:4px;">Dress Code</div><div style="font-size:13px;color:var(--muted);line-height:1.6;">Full college uniform is <strong style="color:#a78bfa;">mandatory</strong> for all participants throughout the event.</div></div>
+        </div>
+        <div style="background:var(--surface);border:1px solid rgba(255,255,255,0.06);border-radius:14px;padding:16px 20px;display:flex;gap:16px;align-items:flex-start;">
+          <div style="background:rgba(0,245,196,0.1);border:1px solid rgba(0,245,196,0.2);border-radius:10px;padding:8px 12px;font-family:'Bebas Neue',sans-serif;font-size:20px;color:var(--accent);flex-shrink:0;line-height:1;min-width:42px;text-align:center;">04</div>
+          <div><div style="font-weight:700;font-size:14px;color:var(--text);margin-bottom:4px;">Code of Conduct</div><div style="font-size:13px;color:var(--muted);line-height:1.6;">Participants and volunteers must communicate respectfully and maintain proper discipline during the event.</div></div>
+        </div>
+        <div style="background:var(--surface);border:1px solid rgba(255,255,255,0.06);border-radius:14px;padding:16px 20px;display:flex;gap:16px;align-items:flex-start;">
+          <div style="background:rgba(255,140,0,0.1);border:1px solid rgba(255,140,0,0.2);border-radius:10px;padding:8px 12px;font-family:'Bebas Neue',sans-serif;font-size:20px;color:var(--orange);flex-shrink:0;line-height:1;min-width:42px;text-align:center;">05</div>
+          <div><div style="font-weight:700;font-size:14px;color:var(--text);margin-bottom:4px;">Lunch Break</div><div style="font-size:13px;color:var(--muted);line-height:1.6;">A lunch break will be provided from <strong style="color:var(--orange);">1:00 PM to 2:00 PM</strong>. All participants must return on time for the remaining rounds.</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRIZE DISTRIBUTION -->
+<section style="position:relative;z-index:1;padding:10px 0 60px;">
+  <div style="max-width:860px;margin:0 auto;padding:0 24px;">
+    <div class="section-label" style="margin-bottom:10px;">&#8212; PRIZE DISTRIBUTION &#8212;</div>
+    <p class="section-sublabel" style="margin-bottom:24px;">Win big at TECH VISTARA 3.0</p>
+    <div class="prize-cols" style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;margin-bottom:16px;">
+      <div style="background:var(--card);border:1px solid rgba(255,215,0,0.2);border-radius:20px;padding:24px;text-align:center;position:relative;overflow:hidden;">
+        <div style="height:3px;background:linear-gradient(90deg,#ffd700,#ffec6e);position:absolute;top:0;left:0;right:0;"></div>
+        <div style="font-size:40px;margin-bottom:10px;">&#x1F3C6;</div>
+        <div style="font-family:'Bebas Neue',sans-serif;font-size:28px;color:#ffd700;letter-spacing:1px;">1st Place</div>
+        <div style="font-size:13px;color:var(--muted);margin-top:8px;line-height:1.7;">Trophy + <strong style="color:#ffd700;">4 Gold Medals</strong><br>(one per member)</div>
+      </div>
+      <div style="background:var(--card);border:1px solid rgba(192,192,192,0.2);border-radius:20px;padding:24px;text-align:center;position:relative;overflow:hidden;">
+        <div style="height:3px;background:linear-gradient(90deg,#c0c0c0,#e8e8e8);position:absolute;top:0;left:0;right:0;"></div>
+        <div style="font-size:40px;margin-bottom:10px;">&#x1F948;</div>
+        <div style="font-family:'Bebas Neue',sans-serif;font-size:28px;color:#c0c0c0;letter-spacing:1px;">2nd Place</div>
+        <div style="font-size:13px;color:var(--muted);margin-top:8px;line-height:1.7;"><strong style="color:#c0c0c0;">4 Silver Medals</strong><br>(one per member)</div>
+      </div>
+      <div style="background:var(--card);border:1px solid rgba(205,127,50,0.2);border-radius:20px;padding:24px;text-align:center;position:relative;overflow:hidden;">
+        <div style="height:3px;background:linear-gradient(90deg,#cd7f32,#e8a96a);position:absolute;top:0;left:0;right:0;"></div>
+        <div style="font-size:40px;margin-bottom:10px;">&#x1F949;</div>
+        <div style="font-family:'Bebas Neue',sans-serif;font-size:28px;color:#cd7f32;letter-spacing:1px;">3rd Place</div>
+        <div style="font-size:13px;color:var(--muted);margin-top:8px;line-height:1.7;"><strong style="color:#cd7f32;">Certificates</strong><br>of Achievement</div>
+      </div>
+    </div>
+    <div class="prize-bottom" style="display:grid;grid-template-columns:1fr 1fr;gap:16px;">
+      <div style="background:var(--card);border:1px solid rgba(0,245,196,0.15);border-radius:16px;padding:20px;display:flex;align-items:center;gap:16px;">
+        <div style="font-size:32px;">&#x1F4DC;</div>
+        <div><div style="font-weight:700;font-size:14px;color:var(--accent);margin-bottom:4px;">All Participants</div><div style="font-size:13px;color:var(--muted);line-height:1.6;">Participation certificate for every team member in recognition of their involvement.</div></div>
+      </div>
+      <div style="background:var(--card);border:1px solid rgba(255,215,0,0.15);border-radius:16px;padding:20px;display:flex;align-items:center;gap:16px;">
+        <div style="font-size:32px;">&#x1F3C5;</div>
+        <div>
+          <div style="font-weight:700;font-size:14px;color:#ffd700;margin-bottom:8px;">General Championship</div>
+          <div style="font-size:13px;color:var(--muted);line-height:1.6;margin-bottom:8px;">Best overall performing team across all rounds.</div>
+          <div style="display:flex;gap:8px;flex-wrap:wrap;">
+            <div style="background:rgba(255,215,0,0.1);border:1px solid rgba(255,215,0,0.25);border-radius:8px;padding:6px 12px;font-family:'Space Mono',monospace;font-size:11px;color:#ffd700;">&#x1F947; 1st &nbsp;&#8377;2,000 Cash</div>
+            <div style="background:rgba(192,192,192,0.08);border:1px solid rgba(192,192,192,0.2);border-radius:8px;padding:6px 12px;font-family:'Space Mono',monospace;font-size:11px;color:#c0c0c0;">&#x1F948; 2nd &nbsp;&#8377;1,000 Cash</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div style="text-align:center;margin-top:16px;font-family:'Space Mono',monospace;font-size:11px;color:var(--muted);background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.06);border-radius:10px;padding:12px;">
+      &#x1F3AD; Prize distribution ceremony will take place at the end of the event
     </div>
   </div>
 </section>
@@ -439,86 +465,9 @@ footer{text-align:center;padding:28px 24px 36px;color:var(--muted);font-size:12p
     <div class="modal-title">YOU'RE IN!</div>
     <p class="modal-sub" id="successMsg">Registration received!</p>
     <div class="modal-id" id="modalId">REG ID: --</div><br>
-    <div class="modal-email-note" id="modalEmailNote">&#x2709; &nbsp;Confirmation email sent to your leader's inbox</div>
+    <div class="modal-email-note">&#x2709; &nbsp;Confirmation email sent to your leader's inbox</div>
   </div>
 </div>
-
-
-<!-- GENERAL RULES -->
-<section style="position:relative;z-index:1;padding:10px 0 40px;">
-  <div style="max-width:860px;margin:0 auto;padding:0 24px;">
-    <div class="section-label" style="margin-bottom:10px;">&#8212; GENERAL RULES &#8212;</div>
-    <p class="section-sublabel" style="margin-bottom:24px;">Please read carefully before the event</p>
-    <div style="background:var(--card);border:1px solid rgba(255,255,255,0.06);border-radius:24px;overflow:hidden;">
-      <div style="height:3px;background:linear-gradient(90deg,var(--accent2),var(--accent3),var(--accent));"></div>
-      <div style="padding:28px 32px;">
-        <div style="display:grid;gap:14px;">
-          <div style="background:var(--surface);border:1px solid rgba(255,255,255,0.06);border-radius:14px;padding:16px 20px;display:flex;gap:16px;align-items:flex-start;">
-            <div style="background:rgba(0,245,196,0.1);border:1px solid rgba(0,245,196,0.2);border-radius:10px;padding:8px 12px;font-family:'Bebas Neue',sans-serif;font-size:20px;color:var(--accent);flex-shrink:0;line-height:1;">01</div>
-            <div><div style="font-weight:700;font-size:14px;color:var(--text);margin-bottom:4px;">Reporting Time</div><div style="font-size:13px;color:var(--muted);line-height:1.6;">The event will begin at <strong style="color:var(--accent);">8:30 AM</strong>. All participants must report to the college by <strong style="color:var(--accent);">8:15 AM</strong>.</div></div>
-          </div>
-          <div style="background:var(--surface);border:1px solid rgba(255,255,255,0.06);border-radius:14px;padding:16px 20px;display:flex;gap:16px;align-items:flex-start;">
-            <div style="background:rgba(255,59,59,0.1);border:1px solid rgba(255,59,59,0.2);border-radius:10px;padding:8px 12px;font-family:'Bebas Neue',sans-serif;font-size:20px;color:var(--red);flex-shrink:0;line-height:1;">02</div>
-            <div><div style="font-weight:700;font-size:14px;color:var(--text);margin-bottom:4px;">Punctuality</div><div style="font-size:13px;color:var(--muted);line-height:1.6;">Late arrival will not be tolerated. Any team arriving after the reporting time will be <strong style="color:var(--red);">disqualified</strong> from the event.</div></div>
-          </div>
-          <div style="background:var(--surface);border:1px solid rgba(255,255,255,0.06);border-radius:14px;padding:16px 20px;display:flex;gap:16px;align-items:flex-start;">
-            <div style="background:rgba(124,58,237,0.1);border:1px solid rgba(124,58,237,0.2);border-radius:10px;padding:8px 12px;font-family:'Bebas Neue',sans-serif;font-size:20px;color:#a78bfa;flex-shrink:0;line-height:1;">03</div>
-            <div><div style="font-weight:700;font-size:14px;color:var(--text);margin-bottom:4px;">Dress Code</div><div style="font-size:13px;color:var(--muted);line-height:1.6;">Full college uniform is <strong style="color:#a78bfa;">mandatory</strong> for all participants throughout the event.</div></div>
-          </div>
-          <div style="background:var(--surface);border:1px solid rgba(255,255,255,0.06);border-radius:14px;padding:16px 20px;display:flex;gap:16px;align-items:flex-start;">
-            <div style="background:rgba(0,245,196,0.1);border:1px solid rgba(0,245,196,0.2);border-radius:10px;padding:8px 12px;font-family:'Bebas Neue',sans-serif;font-size:20px;color:var(--accent);flex-shrink:0;line-height:1;">04</div>
-            <div><div style="font-weight:700;font-size:14px;color:var(--text);margin-bottom:4px;">Code of Conduct</div><div style="font-size:13px;color:var(--muted);line-height:1.6;">Participants and volunteers must communicate respectfully and maintain proper discipline during the event.</div></div>
-          </div>
-          <div style="background:var(--surface);border:1px solid rgba(255,255,255,0.06);border-radius:14px;padding:16px 20px;display:flex;gap:16px;align-items:flex-start;">
-            <div style="background:rgba(255,140,0,0.1);border:1px solid rgba(255,140,0,0.2);border-radius:10px;padding:8px 12px;font-family:'Bebas Neue',sans-serif;font-size:20px;color:var(--orange);flex-shrink:0;line-height:1;">05</div>
-            <div><div style="font-weight:700;font-size:14px;color:var(--text);margin-bottom:4px;">Lunch Break</div><div style="font-size:13px;color:var(--muted);line-height:1.6;">A lunch break will be provided from <strong style="color:var(--orange);">1:00 PM to 2:00 PM</strong>. All participants must return on time for the remaining rounds.</div></div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- PRIZE DISTRIBUTION -->
-<section style="position:relative;z-index:1;padding:10px 0 60px;">
-  <div style="max-width:860px;margin:0 auto;padding:0 24px;">
-    <div class="section-label" style="margin-bottom:10px;">&#8212; PRIZE DISTRIBUTION &#8212;</div>
-    <p class="section-sublabel" style="margin-bottom:24px;">Win big at TECH VISTARA 3.0</p>
-    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;margin-bottom:20px;">
-      <div style="background:var(--card);border:1px solid rgba(255,215,0,0.2);border-radius:20px;padding:24px;text-align:center;position:relative;overflow:hidden;">
-        <div style="height:3px;background:linear-gradient(90deg,#ffd700,#ffec6e);position:absolute;top:0;left:0;right:0;"></div>
-        <div style="font-size:40px;margin-bottom:10px;">&#x1F3C6;</div>
-        <div style="font-family:'Bebas Neue',sans-serif;font-size:28px;color:#ffd700;letter-spacing:1px;">1st Place</div>
-        <div style="font-size:13px;color:var(--muted);margin-top:8px;line-height:1.7;">Trophy + <strong style="color:#ffd700;">4 Gold Medals</strong><br>(one per member)</div>
-      </div>
-      <div style="background:var(--card);border:1px solid rgba(192,192,192,0.2);border-radius:20px;padding:24px;text-align:center;position:relative;overflow:hidden;">
-        <div style="height:3px;background:linear-gradient(90deg,#c0c0c0,#e8e8e8);position:absolute;top:0;left:0;right:0;"></div>
-        <div style="font-size:40px;margin-bottom:10px;">&#x1F948;</div>
-        <div style="font-family:'Bebas Neue',sans-serif;font-size:28px;color:#c0c0c0;letter-spacing:1px;">2nd Place</div>
-        <div style="font-size:13px;color:var(--muted);margin-top:8px;line-height:1.7;"><strong style="color:#c0c0c0;">4 Silver Medals</strong><br>(one per member)</div>
-      </div>
-      <div style="background:var(--card);border:1px solid rgba(205,127,50,0.2);border-radius:20px;padding:24px;text-align:center;position:relative;overflow:hidden;">
-        <div style="height:3px;background:linear-gradient(90deg,#cd7f32,#e8a96a);position:absolute;top:0;left:0;right:0;"></div>
-        <div style="font-size:40px;margin-bottom:10px;">&#x1F949;</div>
-        <div style="font-family:'Bebas Neue',sans-serif;font-size:28px;color:#cd7f32;letter-spacing:1px;">3rd Place</div>
-        <div style="font-size:13px;color:var(--muted);margin-top:8px;line-height:1.7;"><strong style="color:#cd7f32;">Certificates</strong><br>of Achievement</div>
-      </div>
-    </div>
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;">
-      <div style="background:var(--card);border:1px solid rgba(0,245,196,0.15);border-radius:16px;padding:20px;display:flex;align-items:center;gap:16px;">
-        <div style="font-size:32px;">&#x1F4DC;</div>
-        <div><div style="font-weight:700;font-size:14px;color:var(--accent);margin-bottom:4px;">All Participants</div><div style="font-size:13px;color:var(--muted);line-height:1.6;">Participation certificate for every team member in recognition of their involvement.</div></div>
-      </div>
-      <div style="background:var(--card);border:1px solid rgba(255,215,0,0.15);border-radius:16px;padding:20px;display:flex;align-items:center;gap:16px;">
-        <div style="font-size:32px;">&#x1F3C5;</div>
-        <div><div style="font-weight:700;font-size:14px;color:#ffd700;margin-bottom:4px;">General Championship</div><div style="font-size:13px;color:var(--muted);line-height:1.6;">The overall best performing team across all rounds wins the General Championship Trophy.</div></div>
-      </div>
-    </div>
-    <div style="text-align:center;margin-top:16px;font-family:'Space Mono',monospace;font-size:11px;color:var(--muted);background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.06);border-radius:10px;padding:12px;">
-      &#x1F3AD; Prize distribution ceremony will take place at the end of the event
-    </div>
-  </div>
-</section>
 
 <footer>TECH VISTARA 3.0 &nbsp;&middot;&nbsp; BCA Department &nbsp;&middot;&nbsp; SMD College<br>&#169; 2026 All rights reserved</footer>
 
@@ -534,7 +483,6 @@ function closeRound(e,n){if(e.target===document.getElementById('rmodal'+n)){docu
 function closeRoundBtn(n){document.getElementById('rmodal'+n).classList.remove('show');document.body.style.overflow='';}
 document.addEventListener('keydown',function(e){if(e.key==='Escape'){[1,2,3,4].forEach(function(n){document.getElementById('rmodal'+n).classList.remove('show');});document.body.style.overflow='';}});
 
-function fileChosen(inp){if(inp.files[0]){document.getElementById('uploadBox').classList.add('done');var fn=document.getElementById('uploadFname');fn.style.display='block';fn.textContent='\u2713 '+inp.files[0].name;}}
 function setErr(id,show){var el=document.getElementById(id);if(el){show?el.classList.add('err'):el.classList.remove('err');}}
 function validEmail(e){return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(e);}
 function validPhone(p){return /^[6-9]\d{9}$/.test(p);}
@@ -542,7 +490,6 @@ function validPhone(p){return /^[6-9]\d{9}$/.test(p);}
 var registeredTeams = [];
 
 function handleSubmit(){
-  var isOffline = document.getElementById('radio-offline').checked;
   var teamName = document.getElementById('teamName').value.trim();
   var ok = true;
 
@@ -569,11 +516,6 @@ function handleSubmit(){
     setErr('f-m'+i+'p',!validPhone(p));if(!validPhone(p))ok=false;
     setErr('f-m'+i+'e',!validEmail(e));if(!validEmail(e))ok=false;
   }
-  if(!isOffline){
-    var txn=document.getElementById('txnId').value.trim();
-    setErr('f-txn',!txn);if(!txn)ok=false;
-    if(!document.getElementById('screenshot').files.length){document.getElementById('uploadBox').style.borderColor='var(--red)';ok=false;}
-  }
   if(!ok){var first=document.querySelector('.err');if(first)first.scrollIntoView({behavior:'smooth',block:'center'});return;}
 
   document.getElementById('submitBtn').disabled = true;
@@ -589,41 +531,26 @@ function handleSubmit(){
     college:document.getElementById('college').value.trim(),
     branch:document.getElementById('branch').value,
     year:document.getElementById('year').value,
-    payment_mode:isOffline?'Offline (Cash at Venue)':'Online (UPI)',
-    txn_id:isOffline?'N/A':document.getElementById('txnId').value.trim(),
+    payment_mode:'Offline (Cash at Venue)',
+    txn_id:'N/A',
     m1n:document.getElementById('m1n').value.trim(),m1p:document.getElementById('m1p').value.trim(),m1e:leaderEmail,
     m2n:document.getElementById('m2n').value.trim(),m2p:document.getElementById('m2p').value.trim(),m2e:document.getElementById('m2e').value.trim(),
     m3n:document.getElementById('m3n').value.trim(),m3p:document.getElementById('m3p').value.trim(),m3e:document.getElementById('m3e').value.trim(),
     m4n:document.getElementById('m4n').value.trim(),m4p:document.getElementById('m4p').value.trim(),m4e:document.getElementById('m4e').value.trim()
   };
 
-  // Google Sheets — no-cors (Apps Script requirement)
-  fetch(SHEETS_URL, {
-    method: 'POST',
-    mode: 'no-cors',
-    headers: {'Content-Type': 'application/json'},
-    body: JSON.stringify(params)
-  }).catch(function(){});
+  fetch(SHEETS_URL,{method:'POST',mode:'no-cors',headers:{'Content-Type':'application/json'},body:JSON.stringify(params)}).catch(function(){});
 
-  // EmailJS
   emailjs.init(EJS_PUBLIC_KEY);
-  emailjs.send(EJS_SERVICE_ID, EJS_TEMPLATE_ID, params).catch(function(e){console.warn('Admin email error:', e);});
-  emailjs.send(EJS_SERVICE_ID, EJS_STUDENT_TEMPLATE_ID, {
-    to_email: leaderEmail,
-    to_name: leaderName,
-    reg_id: regId,
-    team_name: teamName,
-    payment_mode: params.payment_mode,
-    event_date: '28 March 2026',
-    venue: 'Seminar Hall, SMD College'
-  }).catch(function(e){console.warn('Student email error:', e);});
+  emailjs.send(EJS_SERVICE_ID,EJS_TEMPLATE_ID,params).catch(function(e){console.warn('Admin:',e);});
+  emailjs.send(EJS_SERVICE_ID,EJS_STUDENT_TEMPLATE_ID,{
+    to_email:leaderEmail,to_name:leaderName,reg_id:regId,team_name:teamName,
+    payment_mode:'Offline (Cash at Venue)',event_date:'28 March 2026',venue:'Seminar Hall, SMD College'
+  }).catch(function(e){console.warn('Student:',e);});
 
   registeredTeams.push(teamName.toLowerCase());
-
   document.getElementById('modalId').textContent = 'REG ID: ' + regId;
-  document.getElementById('successMsg').textContent = isOffline
-    ? 'Registration received! Pay Rs.200 cash at the venue before 25 March 2026. Your spot is reserved!'
-    : 'Registration received! We will verify payment and confirm within 24 hours. See you at the arena!';
+  document.getElementById('successMsg').textContent = 'Registration received! Pay Rs.200 cash at the venue on event day. Your spot is reserved!';
   document.getElementById('successModal').classList.add('show');
 }
 </script>
